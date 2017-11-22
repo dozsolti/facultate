@@ -10,23 +10,18 @@ namespace _500Factorial
     {
         static void Main(string[] args)
         {
-            int[] v = null;
-            int comp = Compare(new int[] {  0 }, new int[] { 2 });
-            if (comp==0) {
-                Console.WriteLine("0");
-            }else if (comp == -1)
-            {
-                //v = Substract(new int[] { 1, 0 }, new int[] { 2 });
-                //print("= -", Repara(v));
-                Console.WriteLine("-");
-            }
+            int[] v = new int[1];
+            int[] b = new int[] { 8,9,4,5,2 }, a = new int[] { 1,8,9,2,5,0 };
+
+            v = Substract(a, b);
+
             /*v = Multiply(new int[] { 1 }, new int[] { 2 });
             for (int i = 3; i <= 500; i ++) {
                 v = Multiply(v,nToV(i));
             }*/
 
 
-            //print("V", Repara(v));
+            printCuMinus("V", v);
             Console.ReadKey();
         }
 
@@ -49,10 +44,52 @@ namespace _500Factorial
             }
         }
 
-        /*private static int[] Substract(int[] v1, int[] v2)
+        private static int[] Substract(int[] a, int[] b)
         {
-            
-        }*/
+            int comp = Compare(a, b);
+            if (comp == -1)// => a<b
+            {
+                int[] _temp = a;
+                a = b;
+                b = _temp;
+            }
+
+            int[] v = new int[a.Length];
+            // a = max(a,b)
+            // b = min(a,b)
+            a = Reverse(a);
+            b = Reverse(b);
+
+            for(int i = 0; i < b.Length; i++)
+            {
+                v[i] = a[i] - b[i];
+                if (v[i] < 0)
+                {
+                    v[i] = a[i] +10 - b[i];
+                    a[i + 1]--;
+                }
+            }
+            // for v.length ->a.length
+            // v[i]=a[i]
+            for (int i = b.Length; i < a.Length; i++)
+            {
+                v[i] = a[i];
+            }
+
+            v = Reverse(v);
+            v = Repara(v);
+            if (comp == -1)
+            {
+                v = Reverse(v);
+                int[] _temp = new int[v.Length + 1];
+                for (int i = 0; i < v.Length; i++)
+                    _temp[i] = v[i];
+                _temp[_temp.Length - 1] = -1;
+                v = _temp;
+                v = Reverse(v);
+            }
+            return v;
+        }
 
         private static int[] nToV(int n)
         {
@@ -195,14 +232,27 @@ namespace _500Factorial
 
             return _temp;
         }
+
+        private static void printCuMinus(string name, int[] a)
+        {
+            string str = "";
+            if (a[0] == -1)
+                str = "-";
+
+            for (int i = 1; i < a.Length; i++)
+            {
+                str += a[i].ToString() + "";
+            }
+            Console.WriteLine(name + " : {0}", str);
+        }
         private static void print(string name, int[] a)
         {
             string str = "";
             for (int i = 0; i < a.Length; i++)
             {
                 str += a[i].ToString() + "";
-                if (i % 3 == 0 && i<a.Length-1)
-                    str += '.';
+                //if (i % 3 == 0 && i<a.Length-1)
+                //    str += '.';
             }
             Console.WriteLine(name + " : {0}", str);
         }
