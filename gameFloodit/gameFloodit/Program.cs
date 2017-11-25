@@ -19,21 +19,21 @@ namespace gameFloodit
             int n;// Noua culoare
 
             a:
-            //Se reseteaza numarul de pasii
+            //Se reseteaza numarul de pasi
             k = 0;
             //Crearea unui nivel nou
             SuffleLevel();
             //Afisare
             UpdateScreen();
 
-            //Cat timp nu e jocul terminat
+            //Cat timp jocul nu e terminat
             while (!isLevelDone())
             {
-                //Start: Afisarea informatiilor secundare
+                //Start: Afisarea informatilor secundare
                 Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine("Pana acum ai facut {0} (de) pasii",k);
+                Console.WriteLine("Pana acum ai facut {0} (de) pasi",k);
                 Console.WriteLine("Te rog sa introduci o noua culoare:\n( 0 = Rosu, 1 = Albastru, 2 = Verde, 3 = Galben )");
-                //End: Afisarea informatiilor secundare
+                //End: Afisarea informatilor secundare
                 
                 //Start: Se citeste o culoare noua
                 try
@@ -45,7 +45,7 @@ namespace gameFloodit
                     //Daca nu este un numar jocu se va opri
                     return;
                 }
-                //Schimba culoriile
+                //Schimba culorile
                 ChangeColors(n);
                 //Afiseaza nivelul din nou, dupa schimbari
                 UpdateScreen();
@@ -61,7 +61,7 @@ namespace gameFloodit
             
         }
         /// <summary>
-        /// Incepe procesul de schimbarea culoriilor
+        /// Incepe procesul de schimbarea culorilor
         /// </summary>
         /// <param name="n">Culoarea noua</param>
         private static void ChangeColors(int n)
@@ -76,7 +76,7 @@ namespace gameFloodit
             m[0, 0] = n;
         }
         /// <summary>
-        /// Aceasta functie va schimba culoriile pe poziitile i,j.
+        /// Aceasta functie va schimba culorile pe pozitiile i,j.
         /// De notat ca este important din ce culoare schimbi!
         /// </summary>
         /// <param name="colorTo">Culoarea in care trebuie schimbat</param>
@@ -103,7 +103,7 @@ namespace gameFloodit
         /// <summary>
         /// Ne va spune daca nivelul este complet.
         /// </summary>
-        /// <returns>Toate elementele sunt asemanatoare?</returns>
+        /// <returns>Sunt toate elementele semanatoare?</returns>
         private static bool isLevelDone()
         {
             for (int i = 0; i < m.GetLength(0); i++)
@@ -151,9 +151,9 @@ namespace gameFloodit
 
 
         /// <summary>
-        /// Consola are nevoie de date de tip ConsoleColor (si cu int) ca sa afiseze dupa culoare.
+        /// Consola are nevoie de date de tip ConsoleColor (si nu int) ca sa afiseze dupa culoare.
         /// </summary>
-        /// <param name="n">Numarul culorii</param>
+        /// <param name="n">Numarul culori</param>
         /// <returns>Returneaza culoare pe baza de numar</returns>
         private static ConsoleColor nToColor(int n)
         {
