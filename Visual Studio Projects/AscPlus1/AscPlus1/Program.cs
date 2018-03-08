@@ -8,64 +8,85 @@ namespace AscPlus1
 {
     class Program
     {
-        static int[] x = new int[102];
-        static int n = 100;
+        static int[] numerelePosibile =  { 1, 2 };
+        static int n ;
+        static List<int> x = new List<int>();
         static ulong nrafis;
+        static int startCount;
+
         static void Main(string[] args)
         {
 
             // 1820
             // n%2 ==0 ; n /=2
             // else    ; n = 3*n+1
-            
-            
+
             nrafis = 0;
-            back(1);
-            Console.WriteLine("done.");
+            startCount = 3;
+
+            n = 5;
+            n += startCount-1;
+
+            resetArray();
+            back(startCount);
+            Console.WriteLine("\n\n\n----------------------------------");
+            Console.WriteLine("             Done.");
             Console.ReadKey();
 
         }
         static void back(int k)
         {
-            for (int i = 0; i <= 2; i++)
+            foreach (var i in numerelePosibile)
             {
-                x[k] = i;
-                if (k > 1)
-                    if (x[k] * x[k - 1] != 1)
-                        if (k == n)
-                            afis();
-                        else
-                            back(k + 1);
+                if (x.Count <= n)
+                    x.Add(i);
+                else
+                    x[k] = i;
+                if (k >= startCount) if (x[k] * x[k - 1] != 1)
+                        if (k == n) afis();
+                        else back(k + 1);
                     else;
                 else back(k + 1);
             }
 
         }
-        static bool bun(int[] x, int k)
+
+        private static int getComplementara(int i)
         {
-            if (x[0] == 1)
-                return false;
-            if (k > 0)
-            {
-                if (x[k - 1] == 1 && x[k] == 1)
-                    return false;
-            }
-            return true;
+            if (i == 0)
+                return 0;
+            return 3 - i;
+        }
+
+        private static void resetArray()
+        {
+            x.Clear();
+            for (int i = 0; i < startCount; i++)
+                x.Add(2);
+        }
+
+        static bool potAdauga(int k,int i)
+        {
+               return (x[k] * i != 1);
         }
 
         static void afis()
         {
             nrafis++;
 
-            if (nrafis % 8222000 == 0)
+            //if (nrafis % 80 == 0)
             {
-                Console.Clear();
-                Console.WriteLine(nrafis + " .) ");
+              //  Console.Clear();
+                Console.Write(nrafis + ".) ");
 
-                for (int i = 1; i <= n; i++)
+                for (int i = 0; i < x.Count; i++) {
+                    if (i==startCount)
+                        Console.Write(".");
                     Console.Write(x[i]);
+                }
                 Console.WriteLine();
             }
+            
         }
     }
 }
