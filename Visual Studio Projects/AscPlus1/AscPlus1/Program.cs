@@ -12,16 +12,21 @@ namespace AscPlus1
         static int n ;
         static int[] x;
         static ulong nrafis;
+        static int nrMaxDeDoi;
         static int startCount;
 
         static void Main(string[] args)
         {
+
+            Console.WriteLine("             Loading please wait...");
+            Console.WriteLine("----------------------------------");
 
             // 1820
             // n%2 ==0 ; n /=2
             // else    ; n = 3*n+1
 
             nrafis = 0;
+            nrMaxDeDoi = 53;
 
             startCount = 4;
 
@@ -41,7 +46,7 @@ namespace AscPlus1
             foreach(int i in numerelePosibile)
             {
                 x[k] = i;
-                if (k >= startCount) if (x[k] * x[k - 1] != 1)
+                if (k >= startCount) if (potAdauga(k))
                         if (k == n - 1) {
                             afis();
                             //int q = 2;
@@ -94,26 +99,71 @@ namespace AscPlus1
             return 3 - i;
         }
 
-        static bool potAdauga(int k,int i)
+        static bool potAdauga(int k)
         {
-               return (x[k] * i != 1);
+            if (x[k] * x[k-1] == 1)
+            {
+                return false;
+            }
+            if (k > nrMaxDeDoi) {
+                bool areDoarDoi = true;
+                for (int i = 0; i <= nrMaxDeDoi; i++)
+                {
+                    if (x[i] != 2)
+                    {
+                        areDoarDoi = false;
+                        break;
+                    }
+                }
+                if(areDoarDoi)
+                    return false;
+            }
+
+            return true;
         }
 
         static void afis()
         {
-            nrafis++;
+           nrafis++;
 
-           if (nrafis % 80000 == 0)
-           {
-            //    Console.Clear();
-                Console.Write(nrafis + ".) ");
-
-                for (int i = 0; i < x.Length; i++) {
-                    Console.Write(x[i]);
-                }
-                Console.WriteLine();
-                Console.WriteLine();
+           if (nrafis % 16000000 == 0)
+            {
+                Console.WriteLine(nrafis);
             }
+           {
+                ulong n = arrayToNumber(x);
+                if (n.ToString().Length == 15)
+                {
+                    //    Console.Clear();
+                    Console.Write(nrafis + ".) ");
+
+                /*for (int i = 0; i < x.Length; i++) {
+                    Console.Write(x[i]);
+                }*/
+                
+                    Console.WriteLine(n);
+                 //   Console.WriteLine();
+                    Console.WriteLine();
+                }
+            }
+        }
+
+        private static ulong arrayToNumber(int[] array)
+        {
+            int i = 0;
+            ulong n = 1;
+            while( i < array.Length)
+            {
+                if (array[i] == 1)
+                    if ((n - 1) % 3 == 0)
+                        n = (n - 1) / 3;
+                    else
+                        return 0;
+                else
+                    n = n * 2;
+                i++;
+            }
+            return n;
         }
     }
 }
