@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ namespace AscPlus1
     class Program
     {
         static int[] numerelePosibile =  { 1, 2 };
+        static List<int[]> cazuriDeOmis ;
         static int n ;
         static ulong nFromArray;
         static int[] x;
@@ -22,7 +24,7 @@ namespace AscPlus1
         static void Main(string[] args)
         {
 
-            Console.WriteLine("             Loading please wait...");
+            Console.WriteLine("              Loading please wait");
             Console.WriteLine("------------| "+(System.DateTime.Now.ToString())+" |------------");
 
             // 1820
@@ -32,15 +34,18 @@ namespace AscPlus1
             nrafis = 0;
             nrMaxDeDoi = 10;
 
+            cazuriDeOmis = new List<int[]>();
+            cazuriDeOmis.Add(new int[]{ 2, 2, 2, 2, 2, 2, 1 });
+            cazuriDeOmis.Add(new int[]{ 2, 2, 2, 2, 1, 2, 1 });
             startCount = 4;
 
             n = 1820;
             x = new int[n];
             for (int i = 0; i < startCount; i++)
                 x[i] = 2;
+
             back2(startCount);
-            
-            Console.WriteLine("\n\n\n----------------------------------");
+            Console.WriteLine("\n\n\n++++++++++++++++++++++++++++++++++");
             Console.WriteLine("             Done.");
             Console.ReadKey();
 
@@ -56,11 +61,13 @@ namespace AscPlus1
                 {
                     if (eBun(k))
                     {
-                        
-                            if (k == n - 1)
-                                afis();
-                            else
-                                back2(k + 1);
+
+                        if (k == n - 1)
+                        {
+                            afis();
+                        }
+                        else
+                            back2(k + 1);
                     }
                 }
                 else
@@ -111,6 +118,7 @@ namespace AscPlus1
         {
             if (x[k] * x[k - 1] == 1) //doi de 1 sa nu fie unul langa altul
                 return false;
+
             if (k > nrMaxDeDoi) //numarul maxim de 2 de la inceput
             {
                 bool areDoarDoi = true;
@@ -120,10 +128,29 @@ namespace AscPlus1
                     {
                         areDoarDoi = false;
                         break;
-                    }
+                    } 
                 }
                 if(areDoarDoi)
                     return false;
+            }
+            for(int i = 0; i < cazuriDeOmis.Count; i++)
+            {
+                if (k == cazuriDeOmis[i].Length)
+                {
+                    bool eCazuli = true;
+                    for (int j = 0; j < cazuriDeOmis[i].Length; j++)
+                    {
+                        {
+                            if (cazuriDeOmis[i][j] != x[j])
+                            {
+                                eCazuli = false;
+                                break;
+                            }
+                        }
+                    }
+                    if (eCazuli)
+                        return false;
+                }
             }
 
             
@@ -135,28 +162,27 @@ namespace AscPlus1
 
         static void afis()
         {
-           nrafis++;
+            //printArray();
+            //Console.WriteLine();
+            nrafis++;
             nFromArray = arrayToNumber(x);
-            int len = nFromArray.ToString().Length;
-            if (nrafis % 16000000 == 0)
-            {
-                if(maxLen< len)
-                    maxLen = len;
-                Console.WriteLine(nFromArray);
-            }
-           {
-                if (len == 15)
-                {
-                    //    Console.Clear();
-                    Console.Write(nrafis + ".) ");
+            if (nrafis % 32000000 == 0)
+                Console.WriteLine(nrafis / 32000000);
+            if (nFromArray == 0)
+                return;
 
-                    printArray();
-                
-                    Console.WriteLine("Aaaaaaaaaammmmmmmmmmmmm gasssssssssssssittttttttttttttttt numaaaaaaarrruuuuuuuuuuuuuuuullllll!!!! :"+ nFromArray);
-                    //Console.WriteLine(nFromArray);
-                    Console.WriteLine();
-                }
+            if (maxLen < nFromArray.ToString().Length)
+            {
+                maxLen = nFromArray.ToString().Length;
+                Console.WriteLine("new max de: {0} si nr: {1} ",maxLen,nFromArray);
             }
+            if(nFromArray.ToString().Length>1)
+                Console.WriteLine(nFromArray.ToString().Length);
+
+            /*Console.Write(nrafis + ".) ");
+            printArray();
+            Console.WriteLine();*/
+            
         }
 
         private static ulong arrayToNumber(int[] array)
