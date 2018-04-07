@@ -12,11 +12,33 @@ namespace AscPlus2
 
         static void Main(string[] args)
         {
-            Start();
+            int max, oldmax = 0;
+            ulong i = 706110257767271;
+            //for (ulong i = 520074808440080-5000; i < 520074808440080 + 5000; i++)
+            {
+                int p = 0;
+                ulong n = i;
+                do
+                {
+                    p++;
+                    {
+                        if (n % 2 == 0) n = n / 2;
+                        else n = n * 3 + 1;
+                    }
+                } while (n != 1);
+                //if (p == 1820)
+                {
+                    Console.Write("{0} -> {1}", i, p);
+                }
+                //if (i % 100000 == 0) Console.Write(i + ": " +p+" ");
+            }
+            Console.ReadKey();
+        Console.ReadKey();
+            /*Start();
 
             back();
 
-            Finished();
+            Finished();*/
 
         }
         
@@ -27,13 +49,19 @@ namespace AscPlus2
             // check numberFromV
             while (n.ToString().Length != 15)
             {
-                updateV();
+                auxv = VecOp.Add(auxv, new int[] { 1 });
+                for (int i = 0; i < auxv.Length; i++)
+                {
+                    if (auxv[i] == 1)
+                        v[i] = 3 - v[i];
+                }
                 recalcN();
 
                 nrTestat++;
-                if (nrTestat % 3000 == 0)
+                if (nrTestat % 32000000 == 0)
                 {
                     printStatus();
+                    Console.WriteLine((System.DateTime.Now).ToString());
                 }
 
             }
@@ -61,14 +89,13 @@ namespace AscPlus2
 
         private static void updateV()
         {
-            auxv = VecOp.Add(auxv, new int[] { 2 });
-            for(int i=0; i < auxv.Length; i++)
+            auxv = VecOp.Add(auxv, new int[] { 1 });
+            for(int i = 0; i < auxv.Length; i++)
             {
                 if (auxv[i] == 1)
-                {
-                    v[i] = getComplementara(v[i]);
-                }
+                    v[i] = 3 - v[i];
             }
+            
         }
 
         private static int getComplementara(int i)

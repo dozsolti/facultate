@@ -62,7 +62,7 @@ namespace AscPlus2
         public static void printArray()
         {
             Console.WriteLine();
-            for (int i = 0; i < v.Count; i++)
+            for (int i = 0; i < auxv.Length; i++)
             {
                 Console.Write(v[i]);
             }

@@ -132,7 +132,7 @@ namespace AscPlus1
                 }
                 if(areDoarDoi)
                     return false;
-            }
+            }/*
             for(int i = 0; i < cazuriDeOmis.Count; i++)
             {
                 if (k == cazuriDeOmis[i].Length)
@@ -151,7 +151,7 @@ namespace AscPlus1
                     if (eCazuli)
                         return false;
                 }
-            }
+            }*/
 
             
             /*if ( (k>4) && (x[k] * x[k - 1] * x[k - 2] == 2*2*2)) //doi de 1 sa nu fie unul langa altul
@@ -167,7 +167,14 @@ namespace AscPlus1
             nrafis++;
             nFromArray = arrayToNumber(x);
             if (nrafis % 32000000 == 0)
+            {
                 Console.WriteLine(nrafis / 32000000);
+                Console.WriteLine((System.DateTime.Now).ToString());
+            }
+            if (nrafis % 320000000 == 0)
+            {
+                printArray();
+            }
             if (nFromArray == 0)
                 return;
 
