@@ -14,21 +14,22 @@ function setup() {
                 nn.train([data[0]], [data[1]]);
         }*/
         console.log("gata trainingul.");
-        /*let mNr=0,mPas=0;
+        let mNr=0,mPas=0;
         for (let i = 0; i < 2000000; i++) {
-                let nr = random(500000000000000 , 1000000000000000);
+                let nr = Math.round(random(500000000000000 , 1000000000000000));
                 let x = decPasi(nn.predict([encInput(nr)]),nr);
                 if(x>mPas){
                         mPas = x;
                         mNr=nr;
                         console.log("Noul max este : ",nr,x);
                 }
-        }*/
+        }
+        console.log("gata cautarea.");
         //compare(950435459434052.2);
 }
 function compare(nr =0){
         if(nr==0)
-                nr = random(500000000000000 , 1000000000000000);
+                nr = Math.round(random(500000000000000 , 1000000000000000));
         let guess = decPasi(nn.predict( [encInput(nr)] ),nr);
         console.log(nr,getNrPasi(nr),guess);
 }
