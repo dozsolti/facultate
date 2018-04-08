@@ -131,8 +131,20 @@ class Matrix {
           matrix.data = data.data;
           return matrix;
         }
+        revAdd(n) {
+          if (n instanceof Matrix) {
+            if (this.rows !== n.rows || this.cols !== n.cols) {
+              console.log('Columns and Rows of A must match Columns and Rows of B.');
+              return;
+            }
+            return this.map((e, i, j) => e + n.data[i][j]);
+          } else {
+            return this.map(e => e + n);
+          }
+        }
       }
       
       if (typeof module !== 'undefined') {
         module.exports = Matrix;
       }
+      
