@@ -258,7 +258,7 @@ namespace AcoperireConvexa
             }
             do
             {
-                a.Sort(b => { });
+                //a.Sort(b => { });
             }
         }
 

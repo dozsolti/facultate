@@ -13,7 +13,7 @@ namespace AscPlus2
         static void Main(string[] args)
         {
             int max, oldmax = 0;
-            ulong i = 706110257767271;
+            ulong i = 520074808440080;
             //for (ulong i = 520074808440080-5000; i < 520074808440080 + 5000; i++)
             {
                 int p = 0;
@@ -21,10 +21,10 @@ namespace AscPlus2
                 do
                 {
                     p++;
-                    {
+                    
                         if (n % 2 == 0) n = n / 2;
                         else n = n * 3 + 1;
-                    }
+                    
                 } while (n != 1);
                 //if (p == 1820)
                 {
