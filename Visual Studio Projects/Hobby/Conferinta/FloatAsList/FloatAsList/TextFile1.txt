@@ -1,0 +1,19 @@
+﻿Documentatie pentru Floatz:
+
+	Constructori:
+		0.) () <=> 0.0
+
+		1.) (int i,int z),(1,2) <=> 1.2
+		1.2.) (int i),(1) <=> 1.0
+
+		2.) (long i),(1) <=> 1.0
+		2.2.) (long i,long z),(1,34) <=> 1.34
+
+		3.) (string i),(1) <=> 1.0
+		3.2.) (string i,string z),(1,34) <=> 1.34
+
+		4.) (int[] i),([1]) <=> 1.0
+		4.2.) (int[] i,int[] z),([1],[3,4]) <=> 1.34
+
+		5.) (List<int> i),([1]) <=> 1.0
+		5.2.) (List<int> i,List<int> z),([1],[3,4]) <=> 1.34

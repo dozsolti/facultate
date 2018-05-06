@@ -14,7 +14,8 @@ namespace ConsoleApplication5
             int min = n;
             while (n != -1)
             {
-                min = Math.Min(min, n);
+                if(min>n)
+                    min = n;
                 n = int.Parse(Console.ReadLine());
             }
         }

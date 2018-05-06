@@ -10,7 +10,18 @@ namespace ConsoleApplication7
     {
         static void Main(string[] args)
         {
-            //cmmmc
+            int a = int.Parse(Console.ReadLine());
+            int b = int.Parse(Console.ReadLine());
+            int c = a * b;
+            while (a != b)
+            {
+                if (a > b)
+                    a = a - b;
+                else
+                    b = b - a;
+            }
+            Console.WriteLine("cmmdc:{0}, cmmmc: {1}", a,c/a);
+            Console.ReadKey();
         }
     }
 }

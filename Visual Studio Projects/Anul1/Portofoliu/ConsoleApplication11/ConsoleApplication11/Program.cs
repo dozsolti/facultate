@@ -16,13 +16,11 @@ namespace ConsoleApplication11
             for (int i = 0; i < v.Length; i++)
             {
                 k = i;
+
                 for (int j = i; j < v.Length; j++)
-                {
                     if (v[j] < v[k])
-                    {
                         k = j;
-                    }
-                }
+
                 _temp = v[i];
                 v[i] = v[k];
                 v[k] = _temp;

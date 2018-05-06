@@ -11,7 +11,7 @@ namespace ConsoleApplication9
         static void Main(string[] args)
         {
             int[] v = new int[3];
-            int min = v[0], max = v[0];
+            int min = v[0], max = v[0];       
             foreach (var item in v)
             {
                 min = Math.Min(item, min);

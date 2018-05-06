@@ -32,24 +32,24 @@ namespace AscPlus2
         /// </summary>
         public static void recalcN()
         {
-            if (v.Count != 1820)
+            /*if (v.Count != 1820)
             {
                 n = 0;
                 return;
-            }
+            }*/
 
             n = 1;
             for (i = 0; i < v.Count; i++)
             {
                 if(v[i] == 1)
                 {
-                    if ((v[i] - 1) % 3 == 0)
-                        v[i] = (v[i] - 1) / 3;
-                    else
+                    //if ((v[i] - 1) % 3 == 0)
+                       n = (n - 1) / 3;
+                    /*else
                     {
                         n = 0;
                         return;
-                    }
+                    }*/
                 }
                 else
                 {
