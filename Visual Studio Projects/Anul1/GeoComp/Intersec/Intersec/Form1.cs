@@ -66,15 +66,32 @@ namespace Intersec
         private bool seIntersecteaza()
         {
             return (
-                (careParte(line1, line2[0]) == careParte(line1, line2[1]))
-                && 
-                (careParte(line2, line1[0]) == careParte(line2, line1[1]))
+                careParte(line1[0],line2[0]) != careParte(line1[0], line2[1])
+                &&
+                careParteUp(line2[0], line1[0]) != careParteUp(line2[0], line1[1])
             );
         }
-
-        private bool careParte(List<PointF> lineA, PointF pointB)
+        private string careParte(PointF p1, PointF p2)
         {
-            return false;
+            if (p1.X - p2.X<0)
+                return "dreapta";
+            else
+                return "stanga";
+        }
+        private string careParteUp(PointF p1, PointF p2)
+        {
+            if (p1.Y - p2.Y < 0)
+                return "sus";
+            else
+                return "jos";
+        }
+        private void button2_Click(object sender, EventArgs e)
+        {
+            grp.Clear(Color.White);
+            pictureBox1.Image = bmp;
+            line1 = new List<PointF>();
+            line2 = new List<PointF>();
+            button1.BackColor = Color.White;
         }
     }
 }
