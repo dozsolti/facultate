@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{AFADBC4E-E228-4745-9DCB-89C1273970F9}</ProjectGuid>
+    <ProjectGuid>{3F780E46-AED7-4A80-B19A-8432C8628C8B}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FloatAsList</RootNamespace>
-    <AssemblyName>FloatAsList</AssemblyName>
+    <RootNamespace>ConsoleApplication40</RootNamespace>
+    <AssemblyName>ConsoleApplication40</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,12 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Floatz\Floatz.cs" />
-    <Compile Include="Floatz\FloatzCasts.cs" />
-    <Compile Include="Floatz\FloatzConfig.cs" />
-    <Compile Include="Floatz\FloatzConstants.cs" />
-    <Compile Include="Floatz\FloatzConstructori.cs" />
-    <Compile Include="Floatz\FloatzOperatii.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

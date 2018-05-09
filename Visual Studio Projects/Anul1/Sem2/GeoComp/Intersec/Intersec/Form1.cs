@@ -16,6 +16,7 @@ namespace Intersec
         Bitmap bmp;
         public List<PointF> line1;
         public List<PointF> line2;
+
         public Form1()
         {
             InitializeComponent();
@@ -57,33 +58,18 @@ namespace Intersec
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (seIntersecteaza())
-                button1.BackColor = Color.Red;
-            else
+            if ((careParte(line1[0], line2[0]) != careParte(line1[0], line2[1]) && careParteUp(line2[0], line1[0]) != careParteUp(line2[0], line1[1])))
                 button1.BackColor = Color.Green;
-        }
-
-        private bool seIntersecteaza()
-        {
-            return (
-                careParte(line1[0],line2[0]) != careParte(line1[0], line2[1])
-                &&
-                careParteUp(line2[0], line1[0]) != careParteUp(line2[0], line1[1])
-            );
+            else
+                button1.BackColor = Color.Red;
         }
         private string careParte(PointF p1, PointF p2)
         {
-            if (p1.X - p2.X<0)
-                return "dreapta";
-            else
-                return "stanga";
+            return (p1.X - p2.X<0) ? "dreapta" : "stanga";
         }
         private string careParteUp(PointF p1, PointF p2)
         {
-            if (p1.Y - p2.Y < 0)
-                return "sus";
-            else
-                return "jos";
+            return (p1.Y - p2.Y < 0)? "sus":"jos";
         }
         private void button2_Click(object sender, EventArgs e)
         {

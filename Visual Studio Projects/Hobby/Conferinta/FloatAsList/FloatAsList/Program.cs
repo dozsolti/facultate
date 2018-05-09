@@ -19,10 +19,9 @@ namespace FloatAsList
             Floatz e = new Floatz(new int[] { 1 ,2},new int[] { 8,9 });
             Floatz f = new Floatz("9", 123,true);
             
-            
             Console.WriteLine(Floatz.Constants.E.ToString());
 
-            //Console.WriteLine((float)a);
+            Console.WriteLine((float)a);
             //Console.WriteLine("{0} + {1} = {2} ", a.ToString(), b.ToString(), c.ToString());
 
             Console.ReadKey();

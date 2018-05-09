@@ -4,26 +4,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hanoi
+namespace ConsoleApplication33
 {
     class Program
     {
         static void Main(string[] args)
         {
-            fHanoi(5,'a', 'b', 'c');
+            Hanoi(5, 'a', 'b', 'c');
             Console.ReadKey();
         }
 
-         private static void fHanoi(int nr, char a, char b, char c)
+        private static void Hanoi(int nr, char a, char b, char c)
         {
             if (nr == 1)
                 Console.WriteLine(a + "->" + c);
             else
             {
 
-                fHanoi(nr - 1, a, c, b);
-                fHanoi(1, a, b,c);
-                fHanoi(nr - 1, b, a, c);
+                Hanoi(nr - 1, a, c, b);
+                Hanoi(1, a, b,c);
+                Hanoi(nr - 1, b, a, c);
             }
         }
     }

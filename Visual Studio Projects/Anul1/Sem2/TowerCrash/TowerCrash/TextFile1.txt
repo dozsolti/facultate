@@ -1,0 +1,45 @@
+﻿{
+	"towers":[
+		{
+			name:"Hulk",
+			description:"High hp,High damage, low armor, High reload",
+			hp: 200,
+			damage:23,
+			armor: 0,
+			reload: 5,
+			color: green
+		},{
+			name:"Thor",
+			description:"Medium hp,Medium damage, Medium armor, Medium reload",
+			hp: 120,
+			damage:15,
+			armor: 40,
+			reload: 3,
+			color: yellow
+		},{
+			name:"Iron Man",
+			description:"High hp,Medium damage, High armor, low reload",
+			hp: 100,
+			damage:13,
+			armor: 70,
+			reload: 3,
+			color:red
+		},{
+			name:"Captain America",
+			description:"Medium hp,Medium-Low damage, Extra-High armor, High reload",
+			hp: 90,
+			damage: 10,
+			armor: 100,
+			reload: 4,
+			color:blue
+		},{
+			name:"Hawk eye",
+			description:"Low hp,Low damage, Low armor, Low reload",
+			hp: 70,
+			damage: 6,
+			armor: 15,
+			reload: 1,
+			color:black
+		}
+	]
+}
