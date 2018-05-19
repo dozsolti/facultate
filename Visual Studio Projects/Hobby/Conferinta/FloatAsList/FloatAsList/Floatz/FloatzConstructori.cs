@@ -8,6 +8,7 @@ namespace FloatAsList
     {
         public Floatz(char separator = ',')
         {
+            
             this.separator = separator;
             this.intreaga = new List<int> { 0 };
             this.zecimala = new List<int> { 0 };
@@ -17,9 +18,10 @@ namespace FloatAsList
         {
             // ex. new Floatz("3.14",'.');
             // ex. new Floatz("3,14",',');
+            this.isNegativ = false;
             if (n[0] == '-')
             {
-                this.eNegativ = true;
+                this.isNegativ = true;
                 n = n.Remove(0,1);
             }
             this.separator = separator;
@@ -39,7 +41,7 @@ namespace FloatAsList
             string zecimala = secvente[1];
             foreach (char nr in zecimala)
                 this.zecimala.Add(charToInt(nr));
-
+            this.ComprimaZecimala();
         }
 
         public Floatz(int n, char separator = ',') : this(n.ToString(), separator){}
@@ -59,14 +61,14 @@ namespace FloatAsList
                 string intreaga = i.ToString();
                 if (intreaga[0] == '-')
                 {
-                    this.eNegativ = true;
+                    this.isNegativ = true;
                     intreaga = intreaga.Remove(0,1);
                 }
                 foreach (char nr in intreaga)
                     this.intreaga.Add(charToInt(nr));
             }
             if(isNegativ)
-                this.eNegativ = isNegativ;
+                this.isNegativ = isNegativ;
 
 
             if(z == null)
@@ -84,13 +86,14 @@ namespace FloatAsList
                 foreach (char nr in zecimala)
                     this.zecimala.Add(charToInt(nr));
             }
+            this.ComprimaZecimala();
         }
 
         public Floatz(List<int> intreaga, List<int> zecimala = null, bool isNegativ = false, char separator = ',')
         {
             this.separator = separator;
             this.intreaga = intreaga;
-            this.eNegativ = isNegativ;
+            this.isNegativ = isNegativ;
             if (zecimala == null)
                 this.zecimala = new List<int>{ 0 };
             else
@@ -100,13 +103,14 @@ namespace FloatAsList
         public Floatz(int[] intreaga, int[] zecimala = null, bool isNegativ = false, char separator = ',')
         {
             this.separator = separator;
-            this.eNegativ = isNegativ;
+            this.isNegativ = isNegativ;
 
             this.intreaga = intreaga.ToList();
             if (zecimala == null)
                 this.zecimala = new List<int> { 0 };
             else
                 this.zecimala = zecimala.ToList();
+            this.ComprimaZecimala();
         }
     }
 }

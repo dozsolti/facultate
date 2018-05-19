@@ -8,33 +8,38 @@ namespace FloatAsList
     {
         public static implicit operator float(Floatz x)
         {
-            if (x.intreaga.Count > 7 || x.zecimala.Count > 4)
-                return float.Parse(x.numarEroareCasting);
-
-            float n = 0;
-            foreach (int nr in x.intreaga)
-                n = n * 10 + nr;
-
-            float k = 10;
-            foreach (int nr in x.zecimala)
-            {
-                n += nr / k;
-                k *= 10;
-            }
-
-            return n;
+            return -1;
         }
 
         public static implicit operator int(Floatz x)
         {
-            if (x.intreaga.Count > 7)
-                return int.Parse(x.numarEroareCasting);
-
-            int n = 0;
-            foreach (int nr in x.intreaga)
-                n = n * 10 + nr;
-            return n;
+            return -1;
         }
 
+        public bool isZero()
+        {
+            return (this.isIntreagaZero() && this.isZecimalaZero());
+        }
+        public bool isIntreagaZero()
+        {
+            for (int i= 0; i < this.intreaga.Count; i++)
+                if (this.intreaga[i] != 0)
+                    return false;
+            return true;
+        }
+        public bool isZecimalaZero()
+        {
+            for (int i = 0; i < this.zecimala.Count; i++)
+                if (this.zecimala[i] != 0)
+                    return false;
+            return true;
+        }
+        public static bool ListIsZero(List<int> a)
+        {
+            for (int i = 0; i < a.Count; i++)
+                if (a[i] != 0)
+                    return false;
+            return true;
+        }
     }
 }
