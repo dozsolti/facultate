@@ -124,10 +124,10 @@ namespace FloatAsList
         /// <param name="a"></param>
         /// <param name="b"></param>
         /// <returns></returns>
-        public static int Compare2Lists(List<int> a, List<int> b, string partea = "intreaga")
+        public static int Compare2Lists(List<int> refA, List<int> refB, string partea = "intreaga")
         {
-            a = ComprimaList(a,partea);
-            b = ComprimaList(b, partea);
+            List<int> a = ComprimaList(refA, partea);
+            List<int> b = ComprimaList(refB, partea);
             if (partea == "intreaga")
             {
                 

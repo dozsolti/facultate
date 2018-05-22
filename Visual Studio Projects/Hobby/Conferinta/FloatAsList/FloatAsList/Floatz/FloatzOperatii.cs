@@ -51,8 +51,8 @@ namespace FloatAsList
             }
             #endregion
 
-            c.zecimala = Add2Lists(a.zecimala, b.zecimala);
-            c.intreaga = Add2Lists(a.intreaga, b.intreaga);
+            c.zecimala = Add2Lists(a.zecimala, b.zecimala, "zecimala");
+            c.intreaga = Add2Lists(a.intreaga, b.intreaga, "intreaga");
 
             if (c.zecimala.Count > Math.Max(a.zecimala.Count, b.zecimala.Count))
             {
@@ -64,7 +64,7 @@ namespace FloatAsList
 
             return c;
         }
-        public static List<int> Add2Lists(List<int> refA, List<int> refB)
+        public static List<int> Add2Lists(List<int> refA, List<int> refB, string partea = "intreaga")
         {
             List<int> a = new List<int>();
             a.AddRange(refA);
@@ -72,8 +72,6 @@ namespace FloatAsList
             b.AddRange(refB);
             List<int> c = new List<int>();
 
-            a.Reverse();
-            b.Reverse();
 
             //b va fii lista cu cele mai multe numere
             if (a.Count > b.Count)
@@ -82,14 +80,21 @@ namespace FloatAsList
                 a = b;
                 b = temp;
             }
-
+            if (partea == "zecimala")
+            {
+                for (int i = a.Count; i < b.Count; i++)
+                    a.Add(0);
+            }
+            a.Reverse();
+            b.Reverse();
+            //Console.WriteLine("{0}+{1}",Floatz.ListToString(a), Floatz.ListToString(b));
             int carry = 0;
             for (int i = 0; i < a.Count; i++)
             {
                 int nr = a[i] + b[i] + carry;
                 if (nr > 9)
                 {
-                    carry = 1;
+                    carry = nr / 10;
                     nr %= 10;
                 }
                 else
@@ -102,7 +107,7 @@ namespace FloatAsList
                 int nr = b[i] + carry;
                 if (nr > 9)
                 {
-                    carry = 1;
+                    carry = nr / 10;
                     nr %= 10;
                 }
                 else
@@ -113,6 +118,7 @@ namespace FloatAsList
 
             if (carry > 0)
                 c.Add(carry);
+
             c.Reverse();
             return c;
         }
@@ -186,7 +192,15 @@ namespace FloatAsList
                     fullA.Add(0);
             }
             List<int> fullC = Subtract2Lists(fullA, fullB);
-            c = Floatz.FromOneList(fullC, Math.Max(a.zecimala.Count, b.zecimala.Count));
+
+            int fullCi = 0;
+            if (!a.isZecimalaZero())
+                fullCi += a.zecimala.Count;
+            if (!b.isZecimalaZero())
+                fullCi += b.zecimala.Count;
+
+            c = Floatz.FromOneList(fullC, fullCi);
+            c.ComprimaIntreaga();
             c.ComprimaZecimala();
             return c;
         }
@@ -326,11 +340,11 @@ namespace FloatAsList
                 a = a * new Floatz(mult);
             }
 
-            a.Print();
-            Console.WriteLine(Floatz.ListToString(fullB));
+            //a.Print();
+            //Console.WriteLine(Floatz.ListToString(fullB));
             Floatz c = new Floatz();
             c = DivideFloatzWithLists(a, fullB, nrMaxZecimalaLaImpartire);
-            c.Print();
+            //c.Print();
 
             c.separator = a.separator;
             c.isNegativ = (a.isNegativ || b.isNegativ);
@@ -339,11 +353,11 @@ namespace FloatAsList
 
             return c;
         }
-        public static Floatz DivideFloatzWithLists(Floatz a, List<int> b, long nrMaxZecimalaLaImpartire = 30)
+        public static Floatz DivideFloatzWithLists(Floatz a, List<int> b, long nrMaxZecimalaLaImpartire = 30, bool debugMode = false)
         {
             Floatz c = new Floatz();
             List<int> temp = new List<int>();
-            int cmp;
+            int cmp = 0;
             for (int i = 0; i < a.intreaga.Count; i++)
             {
                 temp.Add(a.intreaga[i]);
@@ -352,15 +366,18 @@ namespace FloatAsList
                 {
                     List<int> deCateOriIntra = DeCateOriIntra(b, temp);
                     List<int> sub = Floatz.Multiply2Lists(deCateOriIntra, b);
-                    
-                    Console.WriteLine(Floatz.ListToString(temp) + "/" + Floatz.ListToString(b) + "=" + Floatz.ListToString(deCateOriIntra));
+                    if (debugMode)
+                        Console.WriteLine(Floatz.ListToString(temp) + "/" + Floatz.ListToString(b) + "=" + Floatz.ListToString(deCateOriIntra));
 
                     c.intreaga.AddRange(deCateOriIntra);
-
-                    Console.Write(Floatz.ListToString(temp) + "-" + Floatz.ListToString(sub) + "=");
+                    if (debugMode)
+                        Console.Write(Floatz.ListToString(temp) + "-" + Floatz.ListToString(sub) + "=");
                     temp = Floatz.Subtract2Lists(temp, sub);
-                    Console.Write(Floatz.ListToString(temp));
-                    Console.WriteLine();
+                    if (debugMode)
+                    {
+                        Console.Write(Floatz.ListToString(temp));
+                        Console.WriteLine();
+                    }
 
                     if (Floatz.ListIsZero(temp))
                         break;
@@ -371,70 +388,97 @@ namespace FloatAsList
                 }
             }
             c.ComprimaIntreaga();
+            if (nrMaxZecimalaLaImpartire == 0)
+                return c;
             c.zecimala.Clear();
             if (Floatz.ListIsZero(temp))
                 temp.Clear();
+            if (debugMode)
+                Console.WriteLine(",");
 
-           Console.WriteLine(",");
-            
-            for (int i = 0; i < a.zecimala.Count ; i++)
+            for (int i = 0; i < a.zecimala.Count; i++)
             {
                 temp.Add(a.zecimala[i]);
-                
+
                 cmp = Compare2Lists(temp, b);
                 if (cmp < 1)
                 {
                     List<int> deCateOriIntra = DeCateOriIntra(b, temp);
                     List<int> sub = Floatz.Multiply2Lists(deCateOriIntra, b);
-
-                    Console.WriteLine(Floatz.ListToString(temp) + "/" + Floatz.ListToString(b) + "=" + Floatz.ListToString(deCateOriIntra));
+                    if (debugMode)
+                        Console.WriteLine(Floatz.ListToString(temp) + "/" + Floatz.ListToString(b) + "=" + Floatz.ListToString(deCateOriIntra));
 
                     c.zecimala.AddRange(deCateOriIntra);
 
-                    Console.Write(Floatz.ListToString(temp) + "-" + Floatz.ListToString(sub) + "=");
+                    if (debugMode)
+                        Console.Write(Floatz.ListToString(temp) + "-" + Floatz.ListToString(sub) + "=");
+
                     temp = Floatz.Subtract2Lists(temp, sub);
-                    Console.Write(Floatz.ListToString(temp));
-                    Console.WriteLine();
+                    cmp = Compare2Lists(temp, b);
+                    if (cmp == 1)
+                        temp.Add(0);
+                    if (debugMode)
+                    {
+                        Console.Write(Floatz.ListToString(temp));
+                        Console.WriteLine();
+                    }
                 }
                 else
                 {
                     c.zecimala.Add(0);
-                    
+
                 }
             }
-            //temp.Add(0);
-            nrMaxZecimalaLaImpartire -= a.zecimala.Count;
-            Console.WriteLine("---start restu---");
-            for (long i = nrMaxZecimalaLaImpartire; i >=0; i--)
+            if (!Floatz.ListIsZero(temp))
             {
-                Console.WriteLine(Floatz.ListToString(temp));
-                cmp = Compare2Lists(temp, b);
-                Console.WriteLine(Floatz.ListToString(temp) + "?" + Floatz.ListToString(b) + "=" + cmp);
-                if (cmp < 1)
+                nrMaxZecimalaLaImpartire -= a.zecimala.Count;
+                if (debugMode)
+                    Console.WriteLine("---start restu---");
+                if (nrMaxZecimalaLaImpartire > 0)
                 {
-                    List<int> deCateOriIntra = DeCateOriIntra(b, temp);
-                    List<int> sub = Floatz.Multiply2Lists(deCateOriIntra, b);
+                    if (cmp == 1)
+                        temp.Add(0);
+                    for (long i = nrMaxZecimalaLaImpartire; i >= 0; i--)
+                    {
+                        if (debugMode)
+                            Console.WriteLine(Floatz.ListToString(temp));
+                        cmp = Compare2Lists(temp, b);
+                        if (debugMode)
+                            Console.WriteLine(Floatz.ListToString(temp) + "?" + Floatz.ListToString(b) + "=" + cmp);
+                        if (cmp < 1)
+                        {
+                            List<int> deCateOriIntra = DeCateOriIntra(b, temp);
+                            List<int> sub = Floatz.Multiply2Lists(deCateOriIntra, b);
+                            if (debugMode)
+                                Console.WriteLine(Floatz.ListToString(temp) + "/" + Floatz.ListToString(b) + "=" + Floatz.ListToString(deCateOriIntra));
 
-                    Console.WriteLine(Floatz.ListToString(temp) + "/" + Floatz.ListToString(b) + "=" + Floatz.ListToString(deCateOriIntra));
-
-                    c.zecimala.AddRange(deCateOriIntra);
-
-                    Console.Write(Floatz.ListToString(temp) + "-" + Floatz.ListToString(sub) + "=");
-                    temp = Floatz.Subtract2Lists(temp, sub);
-                    Console.Write(Floatz.ListToString(temp));
-                    Console.WriteLine();
-                    if (Floatz.ListIsZero(temp))
-                        break;
-                }
-                else
-                {
-                    Console.WriteLine("0 was added.");
-                    c.zecimala.Add(0);
-                    temp.Add(0);
+                            c.zecimala.AddRange(deCateOriIntra);
+                            if (debugMode)
+                                Console.Write(Floatz.ListToString(temp) + "-" + Floatz.ListToString(sub) + "=");
+                            temp = Floatz.Subtract2Lists(temp, sub);
+                            cmp = Compare2Lists(temp, b);
+                            if (cmp == 1)
+                                temp.Add(0);
+                            if (debugMode)
+                            {
+                                Console.Write(Floatz.ListToString(temp));
+                                Console.WriteLine();
+                            }
+                            if (Floatz.ListIsZero(temp))
+                                break;
+                        }
+                        else
+                        {
+                            if (debugMode)
+                                Console.WriteLine("0 was added.");
+                            c.zecimala.Add(0);
+                            temp.Add(0);
+                        }
+                    }
                 }
             }
-            
-            Console.WriteLine(".");
+            if (debugMode)
+                Console.WriteLine(".");
             c.ComprimaZecimala();
             return c;
         }

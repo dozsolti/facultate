@@ -11,23 +11,41 @@ namespace FloatAsList
         {
             Random rnd = new Random();
 
-            //Console.WriteLine(Floatz.Teste.TestInmultire());
-            //Console.WriteLine(Floatz.Teste.TestComparari());
-            //Console.WriteLine(Floatz.Teste.TestScadere());
-            if(Floatz.Teste.TestDeCateOriIntra()!="Nu exista probleme la DeCateOriIntra.")
-                Console.WriteLine(Floatz.Teste.TestDeCateOriIntra());
-            /*List<int> a = new List<int>() { 1,2,3};
-            List<int> i = new List<int> { 0 };
-            Console.WriteLine(Floatz.ListToString(Floatz.Add2Lists(a,i)));
-            i = Floatz.Add2Lists(i, new List<int> { 1 });
-            Console.WriteLine(Floatz.ListToString(Floatz.Add2Lists(a,i)));
-            i = Floatz.Add2Lists(i, new List<int> { 1 });
-            Console.WriteLine(Floatz.ListToString(Floatz.Add2Lists(a, i)));*/
-            //Console.WriteLine(Floatz.ListToString((new Floatz("44").ToOneList())));
-            Floatz a = new Floatz("0,21");//("30,623");//30,623
-            Floatz b = new Floatz("0,3");
-            Floatz c = Floatz.Divide(a, b,10);
-            Console.WriteLine("{0}/{1}={2}",a.ToString(),b.ToString(),c.ToString());
+            /*if (!Floatz.Teste.TestAdunare().StartsWith("Nu"))
+            {
+                Console.WriteLine(Floatz.Teste.TestAdunare());
+                Console.ReadKey();
+
+            }
+            if (!Floatz.Teste.TestInmultire().StartsWith("Nu"))
+            {
+                Console.WriteLine(Floatz.Teste.TestInmultire()); Console.ReadKey();
+            }
+            if (!Floatz.Teste.TestComparari().StartsWith("Nu"))
+            {
+                Console.WriteLine(Floatz.Teste.TestComparari()); Console.ReadKey();
+            }
+            if (!Floatz.Teste.TestScadere().StartsWith("Nu"))
+            {
+                Console.WriteLine(Floatz.Teste.TestScadere()); Console.ReadKey();
+            }
+            if (!Floatz.Teste.TestDeCateOriIntra().StartsWith("Nu"))
+            {
+                Console.WriteLine(Floatz.Teste.TestDeCateOriIntra()); Console.ReadKey();
+            }*/
+            Floatz a = new Floatz("2");
+            Floatz b = new Floatz("1");
+            Floatz c = new Floatz("1");
+            for (int i = 0; i < 30; i++)
+            {
+                b += Floatz.Constants.ONE();
+                c *= b;
+                a += Floatz.Constants.ONE() / c;
+                a.Print();
+            }
+            a.Print();
+
+            //Console.WriteLine("e={0}", a.ToString());
             /*Console.WriteLine(
                 Floatz.ListToString(
                     Floatz.Subtract2IntreagaLists(new List<int> { 7,5 }, new List<int> { 2, 9 })

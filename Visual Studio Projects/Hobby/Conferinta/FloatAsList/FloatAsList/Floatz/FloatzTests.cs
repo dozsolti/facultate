@@ -8,6 +8,43 @@ namespace FloatAsList
     {
         public static class Teste
         {
+            
+            public static string TestAdunare()
+            {
+                object[,] teste = new object[,] {
+                    { "0","0","0" },
+                    { "1","1","2" },
+                    { "1","2","3"},
+                    { "1","3","4"},
+                    { "2","4","6"},
+                    { "6","12","18"},
+                    { "24","12","36"},
+                    { "113","355","468"},
+                    { "0,5","0,16","0,66" },
+                    { "0,16","0,5","0,66" },
+                    { "0,5","0,166","0,666" },
+                    {"0,00416666","0,66666666","0,67083332" }
+                };
+
+                string str = "";
+                for (int i = 0; i < teste.GetLength(0); i++)
+                {
+                    Floatz a = new Floatz((string)teste[i, 0]);
+                    Floatz b = new Floatz((string)teste[i, 1]);
+                    Floatz resultCorrect = new Floatz((string)teste[i, 2]);
+
+                    Floatz result = a+b;
+
+                    if (result != resultCorrect)
+                        str += String.Format(
+                            "\n Test failed:Adunare #{0} nereusita.\n \n {1}+\n {2}=\n {3} |corect e: {4}\n\n",
+                            i, a,b,result,resultCorrect
+                        );
+                }
+                if (str == "")
+                    return "Nu exista probleme la Adunare.";
+                return str;
+            }
             public static string TestDeCateOriIntra()
             {
                 object[,] teste = new object[,] {
@@ -92,10 +129,10 @@ namespace FloatAsList
                     { "0","0","0,0" },
                     { "0","1","-1,0" },
                     { "1","0","1,0"},
-                    { "2","1","1,0"},
+                    { "2","1","1"},
                     { "1,32","1,12","0,2"},
                     { "1,2","1","0,2"},
-                    { "-1,2","1","-2,2"},
+                    { "-1,2","1,0","-2,2"},
                     { "1","-1,2","2,2"}
                 };
 
@@ -105,7 +142,7 @@ namespace FloatAsList
                     Floatz a = new Floatz((string)testeComparari[i, 0]);
                     Floatz b = new Floatz((string)testeComparari[i, 1]);
                     string resultCorrect = (string)testeComparari[i, 2];
-                    Floatz c = Floatz.Subtract(a, b);
+                    Floatz c = a-b;
                     c.ComprimaZecimala();
                     if(c.ToString()!=resultCorrect)
                             str += String.Format(

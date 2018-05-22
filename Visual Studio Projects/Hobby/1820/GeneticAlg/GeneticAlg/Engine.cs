@@ -10,7 +10,7 @@ namespace GeneticAlg
     {
         public static Random r = new Random();
         public static List<Solution> sol = new List<Solution>();
-        public static int K = 6,N = 2000;
+        public static int K = 6,N = 200*2;
         public static List<Solution> par = new List<Solution>();
         public static Solution best;
         public static void Do()
