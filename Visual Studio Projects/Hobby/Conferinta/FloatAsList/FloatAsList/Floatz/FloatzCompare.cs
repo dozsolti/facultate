@@ -10,12 +10,12 @@ namespace FloatAsList
         {
             Floatz a = refA.Clone();
             Floatz b = refB.Clone();
-            if (!a.isNegativ && b.isNegativ)
+            if (!a.isNegative && b.isNegative)
                 return false;
-            if (a.isNegativ && !b.isNegativ)
+            if (a.isNegative && !b.isNegative)
                 return true;
 
-            if (a.isNegativ && b.isNegativ)
+            if (a.isNegative && b.isNegative)
             {
                 // -0.445 > -0.5 => true
                 int compIntreaga = Compare2Lists(a.intreaga, b.intreaga, "intreaga");
@@ -54,12 +54,12 @@ namespace FloatAsList
         {
             Floatz a = refA.Clone();
             Floatz b = refB.Clone();
-            if (!a.isNegativ && b.isNegativ)
+            if (!a.isNegative && b.isNegative)
                 return true;
-            if (a.isNegativ && !b.isNegativ)
+            if (a.isNegative && !b.isNegative)
                 return false;
 
-            if (a.isNegativ && b.isNegativ)
+            if (a.isNegative && b.isNegative)
             {
                 // -0.445 > -0.5 => true
                 int compIntreaga = Compare2Lists(a.intreaga, b.intreaga, "intreaga");
@@ -99,7 +99,7 @@ namespace FloatAsList
         {
             Floatz a = refA.Clone();
             Floatz b = refB.Clone();
-            if (a.isNegativ != b.isNegativ)
+            if (a.isNegative != b.isNegative)
                 return false;
 
             int compIntreaga = Compare2Lists(a.intreaga, b.intreaga, "intreaga");

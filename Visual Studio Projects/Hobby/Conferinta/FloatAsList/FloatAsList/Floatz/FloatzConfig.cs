@@ -6,7 +6,7 @@ namespace FloatAsList
 {
     public partial class Floatz
     {
-        public string numarEroareCasting = "-1.314159265";
+        public string numarEroareCasting = "-1,314159265";
         public char separator = ',';
         
     }

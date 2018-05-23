@@ -47,11 +47,11 @@
     <Compile Include="Floatz\Floatz.cs" />
     <Compile Include="Floatz\FloatzAux.cs" />
     <Compile Include="Floatz\FloatzCasts.cs" />
-    <Compile Include="Floatz\FloatzComparari.cs" />
+    <Compile Include="Floatz\FloatzCompare.cs" />
     <Compile Include="Floatz\FloatzConfig.cs" />
     <Compile Include="Floatz\FloatzConstants.cs" />
-    <Compile Include="Floatz\FloatzConstructori.cs" />
-    <Compile Include="Floatz\FloatzOperatii.cs" />
+    <Compile Include="Floatz\FloatzConstructs.cs" />
+    <Compile Include="Floatz\FloatzOperators.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

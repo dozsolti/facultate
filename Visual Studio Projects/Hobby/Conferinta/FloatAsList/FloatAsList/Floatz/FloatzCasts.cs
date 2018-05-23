@@ -20,6 +20,13 @@ namespace FloatAsList
         {
             return (this.isIntreagaZero() && this.isZecimalaZero());
         }
+        public bool isOne()
+        {
+            if (!this.isZecimalaZero())
+                return false;
+
+            return (this.intreaga.Count==1 && this.intreaga[0]==1);
+        }
         public bool isIntreagaZero()
         {
             for (int i= 0; i < this.intreaga.Count; i++)
