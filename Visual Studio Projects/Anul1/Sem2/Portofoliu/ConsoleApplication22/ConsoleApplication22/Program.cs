@@ -17,7 +17,7 @@ namespace ConsoleApplication22
             for(int i=0;i<a.GetLength(0);i++)
                 for(int j = 0; j < a.GetLength(1); j++)
                 {
-                    while (!ePrim(k))
+                    while (!isPrim(k))
                         k++;
                     a[i, j] = k;
                     k++;
@@ -30,7 +30,7 @@ namespace ConsoleApplication22
             Console.ReadKey();
         }
 
-        private static bool ePrim(int k)
+        private static bool isPrim(int k)
         {
             if (k == 2)
                 return true;

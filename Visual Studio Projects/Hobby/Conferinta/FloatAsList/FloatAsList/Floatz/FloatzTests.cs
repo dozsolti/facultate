@@ -31,15 +31,6 @@ namespace FloatAsList
                 {
                     Console.WriteLine(Floatz.Teste.TestDeCateOriIntra()); Console.ReadKey();
                 }
-
-                else if (!Floatz.Teste.TestPow().StartsWith("Nu"))
-                {
-                    Console.WriteLine(Floatz.Teste.TestPow()); Console.ReadKey();
-                }
-                else if (!Floatz.Teste.TestImpartire().StartsWith("Nu"))
-                {
-                    Console.WriteLine(Floatz.Teste.TestImpartire()); Console.ReadKey();
-                }
                 else
                     Console.WriteLine("Nu exista probleme.");
 
@@ -197,7 +188,8 @@ namespace FloatAsList
                     { "1","-1,2","2,2"},
                     {"3,46666","0,57","2,89666"},
                     {"10","1","9,0" },
-                    {"101","2","99,0" }
+                    {"101","2","99,0" },
+                    {"204,8900000011920928955078125","256", "-51,1099999"}
                 };
 
                 string str = "";
@@ -269,7 +261,7 @@ namespace FloatAsList
             public static string TestPow()
             {
                 object[,] testeComparari = new object[,] {
-                    /*{ "0","9","0,0" },
+                    { "0","9","0,0" },
                     { "1","0","1,0" },
                     { "1","1","1,0"},
                     { "2","1","2,0"},
@@ -277,10 +269,10 @@ namespace FloatAsList
                     { "2","10","1024,0" },
                     { "20","9","512000000000,0" },
                     { "4","0,5","2" },
-                    { "256","0,25","4" }
+                    { "256","0,25","4" },
                     { "4","0,5","2" },
                     { "256","0,4","4" },
-                    {"2","0,5","1" }*/
+                    {"2","0,5","1" }
                 };
 
                 string str = "";

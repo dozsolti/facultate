@@ -12,9 +12,7 @@
             public static Floatz E(char separator=',') { return new Floatz("2" + separator + "71828182845904523536028747135266"); }
             public static Floatz E_CONSTANT(char separator=',') { return new Floatz("0" + separator + "57721566490153286060651209008240"); }
             public static Floatz GOLDEN_RATIO(char separator=',') { return new Floatz("1" + separator + "61803398874989484820458683436563"); }
-            public static Floatz CONWAY(char separator=',') { return new Floatz("1" + separator + "30357726903429639125709911215255"); }
-            public static Floatz FEIGENBAUM_ALPHA(char separator=',') { return new Floatz("2" + separator + "50290787509589282228390287321821"); }
-            public static Floatz SqrtTreshold(char separator=',') { return new Floatz("0" + separator + "0000000000000000000000000000001"); }
+            public static Floatz SqrtTreshold = new Floatz("0,0000000000000001");
         }
     }
 }

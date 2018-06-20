@@ -48,5 +48,19 @@ namespace FloatAsList
                     return false;
             return true;
         }
+        public Floatz ToIntreaga()
+        {
+            Floatz a = new Floatz();
+            a.intreaga.Clear();
+            a.intreaga.AddRange(this.intreaga);
+            return a;
+        }
+        public Floatz ToZecimala()
+        {
+            Floatz a = new Floatz();
+            a.zecimala.Clear();
+            a.zecimala.AddRange(this.zecimala);
+            return a;
+        }
     }
 }

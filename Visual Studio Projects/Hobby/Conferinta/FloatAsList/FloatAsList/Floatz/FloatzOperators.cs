@@ -7,8 +7,13 @@ namespace FloatAsList
     public partial class Floatz
     {
         public static Floatz operator +(Floatz a, Floatz b) => Add(a, b);
+        public static Floatz operator ++(Floatz a) { return a + Floatz.Constants.ONE(); }
+
         public static Floatz operator *(Floatz a, Floatz b) => Multiply(a, b);
+
         public static Floatz operator -(Floatz a, Floatz b) => Subtract(a, b);
+        public static Floatz operator --(Floatz a) { return a - Floatz.Constants.ONE(); }
+
         public static Floatz operator /(Floatz a, Floatz b) => Divide(a, b);
 
         public static Floatz Add(Floatz refA, Floatz refB)
@@ -203,8 +208,12 @@ namespace FloatAsList
             c.ComprimaZecimala();
             return c;
         }
-        public static List<int> Subtract2Lists(List<int> a, List<int> b)
+        public static List<int> Subtract2Lists(List<int> refA, List<int> refB)
         {
+            List<int> a = new List<int>();
+            a.AddRange(refA);
+            List<int> b = new List<int>();
+            b.AddRange(refB);
             List<int> c = new List<int>();
             a.Reverse();
             b.Reverse();
@@ -321,7 +330,7 @@ namespace FloatAsList
             return b;
         }
 
-        public static Floatz Divide(Floatz refA, Floatz refB, long nrMaxZecimalaLaImpartire = 20)
+        public static Floatz Divide(Floatz refA, Floatz refB, long nrMaxZecimalaLaImpartire = 74)
         {
             Floatz a = refA.Clone();
             Floatz b = refB.Clone();
@@ -377,6 +386,7 @@ namespace FloatAsList
                     temp = Floatz.Subtract2Lists(temp, sub);
                     if (debugMode)
                     {
+
                         Console.Write(Floatz.ListToString(temp));
                         Console.WriteLine();
                     }
@@ -414,7 +424,10 @@ namespace FloatAsList
                     c.zecimala.AddRange(deCateOriIntra.GetRange(0, Math.Min(deCateOriIntra.Count, (int)nrMaxZecimalaLaImpartire)));
                     nrMaxZecimalaLaImpartire -= Math.Min(deCateOriIntra.Count, (int)nrMaxZecimalaLaImpartire);
                     if (debugMode)
+                    {
+                        Console.WriteLine("nrMaxZecimalaLaImpartire:" + nrMaxZecimalaLaImpartire);
                         Console.Write(Floatz.ListToString(temp) + "-" + Floatz.ListToString(sub) + "=");
+                    }
 
                     temp = Floatz.Subtract2Lists(temp, sub);
                     cmp = Compare2Lists(temp, b);
@@ -457,6 +470,8 @@ namespace FloatAsList
 
                             c.zecimala.AddRange(deCateOriIntra.GetRange(0, Math.Min(deCateOriIntra.Count, (int)nrMaxZecimalaLaImpartire)));
                             nrMaxZecimalaLaImpartire -= Math.Min(deCateOriIntra.Count, (int)nrMaxZecimalaLaImpartire);
+                            if (nrMaxZecimalaLaImpartire == 0)
+                                break;
                             if (debugMode)
                                 Console.Write(Floatz.ListToString(temp) + "-" + Floatz.ListToString(sub) + "=");
                             temp = Floatz.Subtract2Lists(temp, sub);
@@ -557,63 +572,64 @@ namespace FloatAsList
             }
             return a;
         }
-        public static Floatz Sqrt(Floatz refA)
-        {
-            Floatz a = refA.Clone();
-            Floatz xn = a.Clone();
-            Floatz xn1 = new Floatz("0,5");// (xn+ a/xn)/Floatz.Constants.TWO();
-            for(int i=0;i<30;i++)//while ((xn1 - xn) < Floatz.Constants.SqrtTreshold())
-            {
-                xn1 = (xn + a)/Floatz.Constants.TWO();
-                xn = xn1;
-                xn1.Print();
-                //Console.ReadKey();
 
-            }
-
-            return xn1;
-        }
         public static Floatz Pow(Floatz refA, Floatz refB)
         {
-            if (refB.isZecimalaZero())
+            Floatz a = refA.Clone();
+            Floatz b = refB.Clone();
+            if (a.isZero())
+                return Floatz.Constants.ZERO(a.separator);
+            if (a.isOne() || b.isZero())
+                return Floatz.Constants.ONE(a.separator);
+            if (b.isOne())
+                return a;
+            /*
+             * 1,5
+             * ^1 + ^0,5
+             */
+            Floatz c = Floatz.Constants.ONE();
+
+            if (!b.isIntreagaZero())
             {
-                Floatz a = refA.Clone();
-                Floatz b = refB.Clone();
-                if (a.isZero())
-                    return Floatz.Constants.ZERO(a.separator);
-                if (a.isOne() || b.isZero())
-                    return Floatz.Constants.ONE(a.separator);
-                if (b.isOne())
-                    return a;
-
-                Floatz c = new Floatz(a);
-
+                b = b.ToIntreaga();
+                c = new Floatz(a);
                 b -= Floatz.Constants.ONE();
                 while (!b.isZero())
                 {
                     c *= a;
                     b -= Floatz.Constants.ONE();
+                    //Console.WriteLine("{0}>{1}",b.ToString(),Floatz.Constants.ZERO());
                 }
-                return c;
             }
-            else
+            if (!refB.isZecimalaZero())
             {
-                Floatz a = refA.Clone();
-                Floatz n = refB.Clone() * new Floatz("10");
+                Floatz zec = refB.Clone().ToZecimala();
+
+                Floatz n = (Floatz.Constants.ONE() / zec);
+                //Console.WriteLine(zec.ToString());
+                //Console.WriteLine(n.ToString());
+
                 Floatz xn = a.Clone();
                 Floatz xn1 = xn - (Pow(xn, n) - a) / (n * Pow(xn, (n - Floatz.Constants.ONE())));
-                while((xn1-xn) < Floatz.Constants.SqrtTreshold())
+                Floatz dif = xn - xn1;
+                while (Floatz.Abs(dif) > Floatz.Constants.SqrtTreshold)
                 {
                     Floatz powXnNM1 = Pow(xn, (n - Floatz.Constants.ONE()));
                     xn1 = xn - ((powXnNM1 * xn) - a) / (n * powXnNM1);
+                    dif = xn - xn1;
+                    //Console.WriteLine("xn1: {0}\nxn:{1}",xn1,xn);
                     xn = xn1.Clone();
-                    xn1.Print("xn+1:");
-                    Console.ReadKey();
-                    
                 }
-
-                return xn1;
+                c *= xn1;
             }
+            return c;
+        }
+        public static Floatz Abs(Floatz refA)
+        {
+            Floatz a = new Floatz(refA);
+            if (!refA.isNegative)
+                a.isNegative = false;
+            return a;
         }
     }
 }

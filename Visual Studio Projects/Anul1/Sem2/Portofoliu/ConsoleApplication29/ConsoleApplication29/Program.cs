@@ -10,11 +10,11 @@ namespace ConsoleApplication29
     {
         static void Main(string[] args)
         {
-            Fibonnaci(4);
+            Fibonacci(4);
             Console.ReadKey();
         }
 
-        private static void Fibonnaci(int n, int k = 0,int a=1,int b=1)
+        private static void Fibonacci(int n, int k = 0,int a=1,int b=1)
         {
             if (n == k)
                 return;

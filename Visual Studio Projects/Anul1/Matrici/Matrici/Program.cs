@@ -25,7 +25,7 @@ namespace Matrici
                 int x = ( (n - 1) / 2) - (i% ((n - 1) / 2));
                 Console.Write("{0} ",x);
             }*/
-            print("Matricia este: ", romb(a));
+            print("Matricia este: ", f3(a));
             Console.ReadKey();
         }
 
