@@ -1,0 +1,1 @@
+algoritmul lui Pollard (factor prim)

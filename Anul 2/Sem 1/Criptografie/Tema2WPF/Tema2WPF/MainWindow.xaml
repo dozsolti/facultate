@@ -1,0 +1,82 @@
+﻿<Window x:Class="Tema2WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Tema2WPF"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="529" Width="310">
+    <Grid x:Name="viewPort">
+
+        <Button x:Name="c1" Content="Select File" HorizontalAlignment="Left" Height="300" Margin="0,0,0,0" VerticalAlignment="Top" Width="300" Visibility="Hidden"/>
+        <Label x:Name="label_Copy" Content="File Input" HorizontalAlignment="Left" Margin="115,182,0,0" VerticalAlignment="Top" Width="70" Height="30" FontWeight="Bold" RenderTransformOrigin="0.5,0.5"/>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="26" Margin="25,213,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="250"/>
+        <Button x:Name="button" Content="Browse" HorizontalAlignment="Left" Margin="115,247,0,0" VerticalAlignment="Top" Width="70" Height="30" Click="button_Click"/>
+        <Button Content="Next" HorizontalAlignment="Left" Margin="117,440,0,0" VerticalAlignment="Top" Width="62" Click="btnNext_Click" Height="20" RenderTransformOrigin="0.5,0.5"/>
+
+
+
+        <Button x:Name="c2" Content="Select Method" HorizontalAlignment="Left" Height="300" Margin="300,0,0,0" VerticalAlignment="Top" Width="300" Visibility="Hidden"/>
+        <Label x:Name="label_Copy1" Content="Select Method" HorizontalAlignment="Left" Margin="402,178,0,0" VerticalAlignment="Top" Width="96" Height="30" FontWeight="Bold" RenderTransformOrigin="0.5,0.5"/>
+        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="325,213,0,0" VerticalAlignment="Top" Width="250" Height="22">
+            <ComboBox.DataContext>
+                <Label/>
+            </ComboBox.DataContext>
+            <ComboBoxItem Content="AES" HorizontalAlignment="Left" Width="250" GotFocus="ComboBoxItem_Selected"/>
+            <ComboBoxItem Content="DES" HorizontalAlignment="Left" Width="250" GotFocus="ComboBoxItem_Selected" Margin="0,0,-0.4,0"/>
+            <ComboBoxItem Content="RC2" HorizontalAlignment="Left" Width="250" GotFocus="ComboBoxItem_Selected" Margin="0,0,-0.4,0"/>
+            <ComboBoxItem Content="Triple DES" HorizontalAlignment="Left" Width="250" GotFocus="ComboBoxItem_Selected"/>
+        </ComboBox>
+        <Button Content="Back" HorizontalAlignment="Left" Margin="377,440,0,0" VerticalAlignment="Top" Width="62" Click="btnBack_Click" Height="20" RenderTransformOrigin="0.5,0.5"/>
+        <Button Content="Next" HorizontalAlignment="Left" Margin="457,440,0,0" VerticalAlignment="Top" Width="62" Click="btnNext_Click" Height="20" RenderTransformOrigin="0.5,0.5"/>
+
+
+
+        <Button x:Name="c3" Content="Init values" HorizontalAlignment="Left" Height="300" Margin="600,0,0,0" VerticalAlignment="Top" Width="300" Visibility="Hidden"/>
+        <Label  Content="Key" HorizontalAlignment="Left" Margin="652,10,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox_Key" HorizontalAlignment="Left" Margin="652,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="190"/>
+        <Label  Content="IV" HorizontalAlignment="Left" Margin="652,116,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox_IV" HorizontalAlignment="Left" Margin="652,142,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="190" />
+
+        <Label  Content="Padding" HorizontalAlignment="Left" Margin="652,210,0,0" VerticalAlignment="Top"/>
+        <ComboBox HorizontalAlignment="Left" SelectedIndex="0" Margin="652,237,0,0" VerticalAlignment="Top" Width="190" Height="22">
+            <ComboBox.DataContext>
+                <Label />
+            </ComboBox.DataContext>
+            <ComboBoxItem Content="X923"  HorizontalAlignment="Left" Width="190" GotFocus="ComboBoxItem_Selected_Padding" />
+            <ComboBoxItem Content="PKCS7" HorizontalAlignment="Left" Width="190" GotFocus="ComboBoxItem_Selected_Padding" />
+            <ComboBoxItem Content="Zeros" HorizontalAlignment="Left" Width="190" GotFocus="ComboBoxItem_Selected_Padding" />
+            <ComboBoxItem Content="ISO10126" HorizontalAlignment="Left" Width="190" GotFocus="ComboBoxItem_Selected_Padding" />
+        </ComboBox>
+
+        <Label  Content="Operation Mod" HorizontalAlignment="Left" Margin="652,307,0,0" VerticalAlignment="Top"/>
+        <ComboBox HorizontalAlignment="Left" SelectedIndex="0" Margin="652,334,0,0" VerticalAlignment="Top" Width="190" Height="22">
+            <ComboBox.DataContext>
+                <Label/>
+            </ComboBox.DataContext>
+            <ComboBoxItem Content="CBC" HorizontalAlignment="Left" Width="190" GotFocus="ComboBoxItem_Selected_ChiperMode"/>
+            <ComboBoxItem Content="CFB" HorizontalAlignment="Left" Width="190" GotFocus="ComboBoxItem_Selected_ChiperMode"/>
+            <ComboBoxItem Content="CTS" HorizontalAlignment="Left" Width="190" GotFocus="ComboBoxItem_Selected_ChiperMode"/>
+            <ComboBoxItem Content="ECB" HorizontalAlignment="Left" Width="190" GotFocus="ComboBoxItem_Selected_ChiperMode"/>
+            <ComboBoxItem Content="OFB" HorizontalAlignment="Left" Width="190" GotFocus="ComboBoxItem_Selected_ChiperMode"/>
+        </ComboBox>
+
+
+
+
+        <Button Content="Generate" HorizontalAlignment="Left" Margin="677,399,0,0" VerticalAlignment="Top" Width="142" Click="btnGenerate_Click" Height="26" RenderTransformOrigin="0.5,0.5"/>
+        <Button Content="Back" HorizontalAlignment="Left" Margin="677,440,0,0" VerticalAlignment="Top" Width="62" Click="btnBack_Click" Height="20" RenderTransformOrigin="0.5,0.5"/>
+        <Button Content="Next" HorizontalAlignment="Left" Margin="757,440,0,0" VerticalAlignment="Top" Width="62" Click="btnNext_Click" Height="20" RenderTransformOrigin="0.5,0.5" BorderThickness="1"/>
+
+
+        <Button x:Name="c4" Content="Crypts" HorizontalAlignment="Left" Height="300" Margin="900,0,0,0" VerticalAlignment="Top" Width="300" Visibility="Hidden"/>
+        <Button Content="Crypt" HorizontalAlignment="Left" Margin="977,77,0,0" VerticalAlignment="Top" Width="142" Click="btn_Crypt" Height="158" RenderTransformOrigin="0.5,0.5"/>
+        <Button Content="Decrypt" HorizontalAlignment="Left" Margin="977,302,0,0" VerticalAlignment="Top" Width="142" Click="btn_Decrypt" Height="158" RenderTransformOrigin="0.5,0.5"/>
+
+
+        <Button x:Name="c5" Content="Again?" HorizontalAlignment="Left" Height="300" Margin="1200,0,0,0" VerticalAlignment="Top" Width="300" Visibility="Hidden"/>
+        <Button Content="Goodbye!" HorizontalAlignment="Left" Margin="1228,198,0,0" VerticalAlignment="Top" Width="252" Click="btnGoodbye_Click" Height="102" RenderTransformOrigin="0.5,0.5"/>
+
+
+    </Grid>
+</Window>
