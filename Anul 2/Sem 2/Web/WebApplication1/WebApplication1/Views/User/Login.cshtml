@@ -1,0 +1,91 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<style>
+
+    .login-wrap {
+        max-width: 500px;
+        width: 100%;
+        margin: 10vh auto;
+        position: relative;
+        background: url(https://maxcdn.icons8.com/app/uploads/2016/03/material-1-1000x563.jpg) no-repeat center;
+        background-size: cover;
+        box-shadow: 0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
+    }
+
+    .login-html {
+        width: 100%;
+        height: 100%;
+        padding: 30px 50px 70px;
+        background: rgba(0,0,0,0.5);
+    }
+
+    .login-form .group .label,
+    .login-form .group .button {
+        text-transform: uppercase;
+    }
+
+    .login-form .group {
+        margin-bottom: 15px;
+    }
+
+        .login-form .group .label,
+        .login-form .group .input,
+        .login-form .group .button {
+            width: 100%;
+            color: #fff;
+            display: block;
+        }
+
+        .login-form .group .input,
+        .login-form .group .button {
+            border: none;
+            padding: 15px 20px;
+            border-radius: 25px;
+            background: rgba(255,255,255,.1);
+        }
+
+        .login-form .group .button {
+            background: #1161ee;
+        }
+</style>
+
+
+@model WebApplication1.Models.UserViewModel
+@{
+    using (Html.BeginForm("Login", "User", FormMethod.Post))
+    {
+        <div class="login-wrap">
+            <div class="login-html">
+                @{
+                    if (ViewData.ContainsKey("message"))
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            @ViewData["message"]
+                        </div>
+                    }
+                        }
+                        <h1 style="text-align:center;margin-bottom:64px">Login</h1>
+                        <div class="login-form">
+                            <div class="sign-in-htm">
+
+                                <div class="group">
+                                    <label for="user" class="label">Username</label>
+                                    @Html.TextBoxFor(m => m.Username, new { @class = "input" })
+                                </div>
+                                <div class="group">
+                                    <label for="pass" class="label">Password</label>
+                                    @Html.PasswordFor(m => m.Password, new { @class = "input" })
+                                </div>
+                                <div class="group">
+                                    <input type="submit" class="button" value="Sign In">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        </div>
+
+    }
+}

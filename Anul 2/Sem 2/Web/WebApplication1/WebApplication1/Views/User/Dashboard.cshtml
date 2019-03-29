@@ -1,0 +1,26 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<h2><i>Welcome back,</i>  @{ Write(WebApplication1.Shared.DB.loginedUser.Name); }</h2>
+<h4>Latest used:</h4>
+@{
+    for (int i = 0; i < WebApplication1.Shared.DB.cards.GetRange(0,3).Count; i++)
+    {
+        Card card = WebApplication1.Shared.DB.cards.GetRange(0, 3)[i];
+        <div class="card" @{if (i % 2 == 0) { Write("style=background-color:#EF3E5C"); } }>
+            <div class="card_number">
+                <p >@card.Number</p>
+            </div>
+            <div class="card_holder">
+                <p >C David</p>
+                <p >01/22</p>
+            </div>
+            <div class="card_icon">
+                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/217538/discover-curved-64px.png">
+            </div>
+        </div>
+    }
+}

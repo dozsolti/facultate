@@ -1,0 +1,29 @@
+﻿@model IEnumerable<WebApplication1.Models.Card>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<h2>All cards</h2>
+<p>
+    <a asp-controller="Cards" asp-action="Create">Create New</a>
+</p>
+@{
+    
+    for (int i = 0; i < WebApplication1.Shared.DB.cards.Count; i++)
+    {
+       Card card = WebApplication1.Shared.DB.cards[i];
+        <div class="card" asp-controller="Card" asp-action="Edit" @{if (i % 2 == 0) { Write("style=background-color:#EF3E5C"); } }>
+            <div class="card_number">
+                <p>@card.Number</p>
+            </div>
+            <div class="card_holder">
+                <p>C David</p>
+                <p>01/22</p>
+            </div>
+            <div class="card_icon">
+                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/217538/discover-curved-64px.png">
+            </div>
+            <a class="card_edit" asp-action="Edit" asp-route-id="@card.Id">Edit</a>
+        </div>
+    }
+}
