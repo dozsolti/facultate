@@ -13,38 +13,43 @@ namespace WebAPI.Controllers
     public class CardsController : ControllerBase
     {
         // GET: api/Cards/5
-        [HttpGet("{token}", Name = "Get")]
+        [HttpGet("{token}")]
         public string Get(string token)
         {
             object logginedUser = AuthService.DecodeToken(token);
             if (logginedUser.GetType().ToString() == "System.String")
-                return "{'status':'error','message':'"+ logginedUser + "'}";
+                return "{\"status\":\"error\",\"message\":\"" + logginedUser + "\"}";
 
             User user = logginedUser as User;
 
             StringBuilder myCards = new StringBuilder();
 
-            foreach (Card card in user.Cards)
-                myCards.AppendFormat("( id:'{0}',number:'{1}'),",card.Id,card.Number);
-            //Sterg virgula de la sfarsit
-            myCards.Remove(myCards.Length - 1,1);
+            if (user.Cards.Count > 0)
+            {
+                foreach (Card card in user.Cards)
+                    myCards.Append("{ \"id\":\"" + card.Id.ToString() + "\",\"number\":\"" + card.Number.ToString() + "\" },");
+                //Sterg virgula de la sfarsit
+                myCards.Remove(myCards.Length - 1, 1);
+            }
+            else
+                myCards.Append("");
 
-            return "{'status':'success','cards':[" + myCards.ToString() + "]}";
+            return "{\"status\":\"success\",\"cards\":[" + myCards.ToString() + "]}";
             
         }
 
         // POST: api/Cards
         [HttpPost("{token}")]
-        public string Post(string token,[FromBody] string value)
+        public string Post(string token,[FromForm] string value)
         {
             object logginedUser = AuthService.DecodeToken(token);
-            if (logginedUser.GetType().ToString() == "System.String")
-                return "{'status':'error','message':'" + logginedUser + "'}";
+            if (logginedUser==null && logginedUser.GetType().ToString() == "System.String")
+                return "{\"status\":\"error\",\"message\":\"" + logginedUser + "\"}";
 
             User user = logginedUser as User;
             user.Cards.Add(new Card(value));
 
-            return "{'status':'success','message':'Cardul a fost salvat'}";
+            return "{\"status\":\"success\",\"message\":\"Cardul a fost salvat\"}";
 
         }
 
@@ -54,14 +59,14 @@ namespace WebAPI.Controllers
         {
             object logginedUser = AuthService.DecodeToken(token);
             if (logginedUser.GetType().ToString() == "System.String")
-                return "{'status':'error','message':'" + logginedUser + "'}";
+                return "{\"status\":\"error\",\"message\":\"" + logginedUser + "\"}";
 
             User user = logginedUser as User;
             user.Cards.RemoveAt(
                 user.Cards.FindIndex(c=>c.Id.ToString() == id)
                 );
 
-            return "{'status':'success','message':'Cardul a fost sters'}";
+            return "{\"status\":\"success\",\"message\":\"Cardul a fost sters\"}";
 
         }
     }
