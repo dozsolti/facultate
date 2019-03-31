@@ -1,0 +1,35 @@
+<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-white shadow-sm">
+  <div class="container">
+    <a class="navbar-brand" routerLink="/">Titlu</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
+      aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+
+        <ul class="navbar-nav ml-auto mt-2 mt-lg-0" *ngIf="userService.isLoggined()">
+            <li class="nav-item active">  
+              <a class="nav-link" routerLink="/dashboard">Dashboard</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" routerLink="/card/create">Adauga card</a>
+              </li>
+            <li class="nav-item ml-md-2">
+              <button class="btn btn-outline-primary btn-block rounded-pill" (click)="Logout()">Deconectare</button>
+            </li>
+          </ul>
+      <ul class="navbar-nav ml-auto mt-2 mt-lg-0" *ngIf="userService.isLoggined()===false">
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/">Acasa</a>
+        </li>
+        <li class="nav-item ml-md-2">
+          <button class="btn btn-primary btn-block" routerLink="/login">Logare</button>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</nav>
+<router-outlet></router-outlet>

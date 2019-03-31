@@ -1,0 +1,64 @@
+<div class="container p-5">
+  <div class="row">
+    <div class="col-sm-6">
+      <h1>Istoric</h1>
+    </div>
+    <div class="col-sm-6 text-right">
+      <button class="btn btn-success" routerLink="/card/create">Adauga Card</button>
+    </div>
+  </div>
+  <div *ngIf="errorMessage!==''">
+    {{errorMessage}}
+  </div>
+  <h4 class="text-center text-muted mt-3" *ngIf="cards.length===0">Nu sunt carduri</h4>
+  <div class="row" *ngIf="cards.length>0 && errorMessage ===''">
+    <div class="col" *ngFor="let card of cards;let i = index" data-toggle="modal" data-target="#deleteModal"
+      (click)="currentCard = card">
+      <div class="my-card" [style.backgroundColor]="i%2==1 ? '#EF3E5C' :''">
+        <div class="my-card_number">
+          <p>{{card.number}}</p>
+        </div>
+        <div class="my-card_holder">
+          <p>C David</p>
+          <p>01/22</p>
+        </div>
+        <div class="my-card_icon">
+          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/217538/discover-curved-64px.png">
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true" *ngIf="currentCard">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Chiar vrei sa stergi acest card?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="my-card" [style.backgroundColor]="i%2==1 ? '#EF3E5C' :''">
+          <div class="my-card_number">
+            <p>{{currentCard.number}}</p>
+          </div>
+          <div class="my-card_holder">
+            <p>C David</p>
+            <p>01/22</p>
+          </div>
+          <div class="my-card_icon">
+            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/217538/discover-curved-64px.png">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Nu</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="DeleteCurrentCard()">Da</button>
+      </div>
+    </div>
+  </div>
+</div>

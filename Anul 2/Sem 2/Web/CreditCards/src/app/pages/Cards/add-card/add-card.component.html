@@ -1,0 +1,20 @@
+<div class="container pt-5">
+  <div class="row justify-content-center align-items-center">
+    <div class="col-sm-10 col-md-8 col-lg-6">
+      <h1>Adauga card nou</h1>
+      <br>
+      <div class="w-100">
+
+        <form (submit)="Salveaza();return;">
+          <div class="form-group">
+            <input type="text" class="form-control" name="cardNumber" placeholder="Numarul cardului" [(ngModel)]="cardNumber">
+          </div>
+          <div class="text-right">
+            <button type="submit" class="btn btn-success">Salveaza</button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,74 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+  background-color: #fafafa;
+}
+
+.my-card {
+  color: #FFF;
+  background: #ff5722;
+  border-radius: 5px;
+  width: 280px;
+  margin: 1em;
+  display: inline-flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 1em;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-flow: row wrap;
+  flex-flow: row wrap;
+  cursor: pointer;
+  z-index: 1;
+  position: relative;
+  -webkit-transition: all ease .45s;
+  transition: all ease .45s;
+}
+
+.my-card:before {
+  content: '';
+  background: url(assets/images/world_map.jpg);
+  opacity: 0.2;
+  -webkit-transform: translateX(-16px);
+  transform: translateX(-16px);
+  border-radius: 5px;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  position: absolute;
+  z-index: -100;
+}
+
+.my-card_number,
+.app_inner aside .wallet .my-card_holder>p {
+  font-size: 20px;
+  color: #FFF;
+}
+
+.my-card_holder {
+  width: 50%;
+}
+
+.my-card_number {
+  width: 100%;
+}
+
+.my-card_icon {
+  width: 20%;
+}
+
+.my-card_icon>img {
+  width: 35px;
+  height: auto;
+}
+
+.my-card_edit {
+  width: 100%;
+}
+
+.my-card_edit:hover {
+  color: lightgoldenrodyellow !important;
+}
