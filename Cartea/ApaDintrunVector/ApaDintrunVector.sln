@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2046
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApaDintrunVector", "ApaDintrunVector\ApaDintrunVector.csproj", "{0DB11EEE-1388-4E3E-A725-E90D8D6C796F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0DB11EEE-1388-4E3E-A725-E90D8D6C796F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DB11EEE-1388-4E3E-A725-E90D8D6C796F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DB11EEE-1388-4E3E-A725-E90D8D6C796F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DB11EEE-1388-4E3E-A725-E90D8D6C796F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A0C79499-D3A3-4A28-9545-D4A0B4AF5820}
+	EndGlobalSection
+EndGlobal
