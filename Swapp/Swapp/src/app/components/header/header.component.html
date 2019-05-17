@@ -1,0 +1,30 @@
+<nav class="navbar bg-white navbar-light navbar-expand-md fixed-top shadow-sm">
+  <div class="container">
+    <b class="navbar-brand" routerLink="/">Swapp</b>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <!-- <div class="navbar-nav mx-auto">
+        <input>
+      </div> -->
+      <ul class="navbar-nav ml-auto" *ngIf="userService.isLoggined()">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/offers/create">Adauga Oferta</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/offers">Ofertele mele</a>
+        </li>
+        <li class="nav-item pointer">
+          <a class="nav-link" (click)="Logout()">Deconectare</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto" *ngIf="userService.isLoggined()===false">
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/login">Logare</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,145 @@
+<h4 *ngIf="offerModel.isGood()===false">
+  {{offerModel.message}}
+</h4>
+<div *ngIf="offerModel.isGood()">
+
+  <h4 *ngIf="bookModel.isGood()===false">
+    {{bookModel.message}}
+  </h4>
+
+  <div class="text-center">
+    <app-book [book]="book" routerLink="/book/{{book.isbn}}" *ngIf="book"></app-book>
+  </div>
+
+  <div *ngIf="offerModel.value.status==='ready' || offerModel.value.status==='rejected'">
+    <h3>Oferta</h3>
+    <mat-card class="section">
+      <img src="/assets/images/no-cover.jpg" class="rounded-circle d-inline-block mb-1 mr-2" alt="Cinque Terre"
+        width="42px" height="42px">
+      <h4 class="d-inline-block">{{offerModel.value.fromUser.name}}</h4>
+      <p>{{offerModel.value.description}}</p>
+      <small>{{offerModel.value.created | date: "dd MMM. yyyy"}}</small>
+    </mat-card>
+    <div class="text-right text-danger" *ngIf="isMine()">Aceasta oferta este pusa de catre tine.</div>
+    <div class="text-right" *ngIf="offerModel.value.status==='ready' && isMine()===false">
+      <button mat-flat-button color="primary" (click)="Accept()">Accepta</button>
+    </div>
+
+  </div>
+
+  <div *ngIf="offerModel.value.status==='rejected'">
+    <h3>Raspuns</h3>
+    <section>
+      <h5>Proprietarul nu a acceptat sa-ti ofere cartea.</h5>
+      <pre class="text-danger">{{GetRejectedMessage()}}</pre>
+    </section>
+    <div class="text-right" *ngIf="offerModel.value.status==='ready'">
+      <button class="btn btn-primary btn-lg" (click)="Accept()">Accepta</button>
+    </div>
+  </div>
+
+  <div class="text-center" *ngIf="offerModel.value.status==='pending'">
+    <h1 class="mt-4">Esti aproape gata!</h1>
+    <p class="mt-5">Mai trebuie doar ca <a
+        routerLink="/user/{{offerModel.value.fromUser.username}}">@{{offerModel.value.fromUser.username}}</a> sa
+      confirme.</p>
+    <p class="mt-4">Te rog sa revii mai tarziu pentru noutati.</p>
+    <div class="my-5 custom-control custom-checkbox">
+      <input type="checkbox" class="custom-control-input" id="emailNotify">
+      <label class="custom-control-label" for="emailNotify">Vreau sa fiu notificat prin email.</label>
+    </div>
+    <button class="btn btn-primary btn-lg col-sm-6" routerLink="/">Cauta si alte carti</button>
+  </div>
+
+  <div *ngIf="offerModel.value.status==='asking'">
+
+    <div class="text-center">
+      <h1 class="mt-4">Oferta in asteptare!</h1>
+      <p class="my-3"> <a
+          routerLink="/user/{{offerModel.value.toUser.username}}">@{{offerModel.value.toUser.username}}</a> ti-a
+        solicitat oferta.<br>Acuma depinde doar de
+        tine
+        daca vrei sa faceti schimbi de contate.<br>
+        <small>{{offerModel.value.created | date: "dd MMM. yyyy"}}</small></p>
+
+      <div class="row offset-md-3 col-md-6">
+        <div class="col-6">
+          <button class="btn btn-danger btn-lg btn-block shadow-sm" data-toggle="modal"
+            data-target="#modalReject">Refuza</button>
+        </div>
+        <div class="col-6">
+          <button class="btn btn-primary btn-lg btn-block shadow-sm" (click)="Aprove()">Accepta</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="modalReject" tabindex="-1" role="dialog" aria-labelledby="modalRejectLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-lg rounded-0" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div class="py-2 text-center">
+              <h4 class="font-weight-bold">Nu vrei sa faci schimb cu {{offerModel.value.toUser.name}}</h4>
+            </div>
+            <textarea rows="10" placeholder="Spune-i si de ce … (Optional)" [(ngModel)]="rejectMessage"></textarea>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger rounded-0" data-dismiss="modal">Inchide</button>
+            <button type="button" class="btn btn-primary rounded-0 px-4" data-dismiss="modal"
+              (click)="Reject()">Trimite</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="offerModel.value.status==='running'">
+    <h3 class="text-center my-5">Schimbul este in rulare</h3>
+    <div class="row">
+      <div class="col-5">
+        <mat-card>
+          <img src="/assets/images/no-cover.jpg" class="rounded-circle d-inline-block mb-1 mr-2" alt="Cinque Terre"
+            width="42px" height="42px">
+          <h4 class="d-inline-block">{{offerModel.value.fromUser.name}}</h4>
+          <hr><b>{{offerModel.value.fromUser.telephone}}</b>
+        </mat-card>
+      </div>
+      <div class="col text-center">
+        <h1>-></h1>
+      </div>
+      <div class="col-5">
+        <mat-card>
+          <img src="/assets/images/no-cover.jpg" class="rounded-circle d-inline-block mb-1 mr-2" alt="Cinque Terre"
+            width="42px" height="42px">
+          <h4 class="d-inline-block">{{offerModel.value.toUser.name}}</h4>
+          <hr><b> {{offerModel.value.toUser.telephone}}</b>
+        </mat-card>
+      </div>
+    </div>
+    <div class="text-center" *ngIf="isMine()===false">
+      <br>
+      <p><b>
+          Doar cel care a pus oferta poate sa o inchida.
+        </b></p>
+    </div>
+    <div class="text-center" *ngIf="isMine()">
+      <br>
+      <p><b>
+          Doar tu poti o incheia oferta.
+        </b></p>
+      <button class="btn btn-danger btn-lg col-sm-4" (click)="Close()">Inchide</button>
+    </div>
+  </div>
+
+  
+  <div class="text-center offset-md-2 col-md-8" *ngIf="offerModel.value.status==='closed'">
+    <h3 class="text-center mt-5">Schimbul s-a terminat</h3>
+    <p>Schimbul tau cu <a routerLink="/user/{{offerModel.value.fromUser.username}}" *ngIf="isMine()===false">@{{offerModel.value.fromUser.username}}</a> s-a incheiat.</p>
+    <p>Schimbul tau cu <a routerLink="/user/{{offerModel.value.toUser.username}}" *ngIf="isMine()">@{{offerModel.value.toUser.username}}</a> s-a incheiat.</p>
+    <br>
+    <h3>Iti multumesc ca ai folosit serviul nostru!</h3>
+    <br>
+    <button class="btn btn-primary btn-lg col-sm-6" routerLink="/">Cauta si alte carti</button>
+
+  </div>
+</div>

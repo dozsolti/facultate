@@ -1,0 +1,44 @@
+<h1 class="text-center my-5">Adauga o oferta</h1>
+<div class="offset-md-3 col-md-6">
+
+  <div class="alert alert-secondary" *ngIf="createOfferModel.isLoading">
+    {{createOfferModel.message}}
+  </div>
+  <div class="alert alert-danger" *ngIf="createOfferModel.hasError">
+    {{createOfferModel.message}}
+  </div>
+  <div class="alert alert-success" *ngIf="createOfferModel.isGood()">
+    {{createOfferModel.value}}
+  </div>
+
+
+  <label for="bookSearchQuery">1. <b>Alege cartea</b>:</label>
+  <div class="form-group input-group">
+    <mat-form-field class="w-100">
+      <input matInput placeholder="Cauta carte dupa titlu, author sau ISBN" [(ngModel)]="searchQuery"
+        (ngModelChange)="Search()">
+    </mat-form-field>
+
+  </div>
+
+
+  <div class="text-center" *ngIf="books.isLoading">
+    <i>{{books.message}}</i>
+  </div>
+  <div class="text-center" *ngIf="books.hasError">
+    <div class="alert alert-danger"> <i>{{books.message}}</i></div>
+  </div>
+  <div class="vertical-list" *ngIf="books.isGood()">
+    <app-book [class.selected]="selectedBook.isbn===book.isbn" (click)="selectedBook=book"
+      *ngFor="let book of books.value.items" [book]="book"></app-book>
+  </div>
+
+  <div class="mt-5 mb-3">
+    <label for="bookSearchQuery">2. <b>Despre</b>:</label>
+    <textarea matInput class="bg-white p-2" rows="5" placeholder="Adauga informatii suplimentare (Optional)" [(ngModel)]="description"></textarea>
+  </div>
+
+  <div class="text-right">
+    <button type="submit" mat-flat-button color="primary" (click)="CreateOffer()">Creaza oferta</button>
+  </div>
+</div>

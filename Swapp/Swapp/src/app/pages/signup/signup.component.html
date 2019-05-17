@@ -1,0 +1,41 @@
+<h1 class="text-center my-5">Creare cont</h1>
+<div class="offset-md-3 col-md-6">
+
+  <div class="alert alert-secondary" [class.alert-danger]="signUpModel.isLoading===false"
+    *ngIf="signUpModel.isGood()===false && this.signUpModel.status!=='ready'">
+    {{signUpModel.message}}
+  </div>
+
+  <form [formGroup]="newUser" (ngSubmit)="Signup()">
+    <mat-card class="bg-white p-4 my-4">
+
+      <mat-form-field class="w-100">
+        <input matInput placeholder="Introduce numele tau" formControlName="name">
+      </mat-form-field>
+
+      <mat-form-field class="w-100">
+        <input type="email" matInput placeholder="Introduce emailul tau" formControlName="email">
+      </mat-form-field>
+
+      <mat-form-field class="w-100">
+        <input matInput placeholder="Introduce numele tau de utilizator" formControlName="username">
+      </mat-form-field>
+
+      <mat-form-field class="w-100">
+        <input type="password" autocomplete="new-password" matInput placeholder="Introduce parola"
+          formControlName="password">
+      </mat-form-field>
+
+      <mat-form-field class="w-100">
+        <input type="tel" matInput placeholder="Introduce numarul tau de telefon" formControlName="telephone">
+      </mat-form-field>
+
+
+    </mat-card>
+    <p>Creeand cont accepti <a class="text-primary pointer" routerLink="/terms">Termenii si conditiile</a>. </p>
+
+    <div class="text-right">
+      <button type="submit" mat-flat-button color="primary" [disabled]="newUser.valid===false">Inregistreaza-te</button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,8 @@
+<div class="alert alert-secondary" [class.alert-danger]="userModel.isLoading===false"
+  *ngIf="userModel.isGood()===false">
+  {{userModel.message}}
+</div>
+<div *ngIf="userModel.isGood()">
+  <h1>{{userModel.value.name}}</h1>
+  <h3>{{userModel.value.username}}</h3>
+</div>

@@ -1,0 +1,60 @@
+<h4 *ngIf="bookModel.isGood()===false">
+  {{bookModel.message}}
+</h4>
+
+<div *ngIf="bookModel.isGood()">
+
+  <div class="text-center">
+    <app-book [book]="book"></app-book>
+  </div>
+
+  <h3>Detalii</h3>
+  <mat-card class="section">
+    {{book.description}}
+    <div class="row mt-2">
+      <div class="col-6 col-md-4 col-lg-3 col-xl-2 m-2 p-2">
+        <b>Categorii:</b><br>
+        <span *ngFor="let category of book.categories">{{category}} ,</span>
+      </div>
+      <div class="col-6 col-md-4 col-lg-3 col-xl-2 m-2 p-2">
+        <b>Limba:</b><br>{{book.language}}
+      </div>
+      <div class="col-6 col-md-4 col-lg-3 col-xl-2 m-2 p-2">
+        <b>Nr de pagini:</b><br>{{book.pageCount}}
+      </div>
+      <div class="col-6 col-md-4 col-lg-3 col-xl-2 m-2 p-2">
+        <b>Data publicarii:</b><br>{{book.publishedDate}}
+      </div>
+      <div class="col-6 col-md-4 col-lg-3 col-xl-2 m-2 p-2">
+        <b>Publisher:</b><br>{{book.publisher}}
+      </div>
+    </div>
+
+  </mat-card>
+  <h3>Oferte</h3>
+  <mat-card class="section">
+
+    <h4 *ngIf="offersModel.message.length > 0">
+      {{offersModel.message}}
+    </h4>
+
+    <div *ngIf="offersModel.isGood()">
+      <small class="text-muted">{{offersModel.value.length}} de oferte gasite</small>
+      <mat-card class="bg-white shadow-sm mt-4 p-2" *ngFor="let offer of offersModel.value" routerLink="/offer/{{offer.id}}">
+        <div class="row">
+          <div class="col-1 text-right">
+            <img src="/assets/images/no-cover.jpg" class="rounded-circle" alt="Cinque Terre" width="42px" height="42px">
+          </div>
+          <div class="col-9">
+            <h4>{{offer.fromUser.name}}</h4>
+            <p>{{offer.description}}</p>
+            <small>{{offer.created | date: "dd MMM yyyy"}}</small>
+          </div>
+          <div class="col-2 text-center align-self-center">
+            <button mat-flat-button color="primary">Vezi</button>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  </mat-card>
+</div>

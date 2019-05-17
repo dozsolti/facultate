@@ -1,0 +1,31 @@
+<div class="text-center">
+  <h1 class=" my-5">Ofertele mele</h1>
+  <h3 class="alert alert-danger" *ngIf="offersModel.hasError">{{offersModel.message}}</h3>
+  <h3 class="my-3" *ngIf="offersModel.isLoading">Se incarca...</h3>
+</div>
+<mat-tab-group dynamicHeight backgroundColor="primary" mat-align-tabs="center" animationDuration="0ms" *ngIf="offersModel.isGood()">
+
+  <mat-tab label="{{tab.name}}" *ngFor="let tab of tabs;let i = index">
+    <section>
+      <div class="text-center" *ngIf="GetOffers(tab.id).length===0">
+        Nu sunt oferte.
+      </div>
+      <div class="bg-white shadow-sm mb-2 p-2" *ngFor="let offer of GetOffers(tab.id)" routerLink="/offer/{{offer.id}}">
+        <div class="row">
+          <div class="col-1 text-right">
+            <img src="/assets/images/no-cover.jpg" class="rounded-circle" alt="Cinque Terre" width="42px" height="42px">
+          </div>
+          <div class="col-9">
+            <p *ngIf="offer.description">{{offer.description}}</p>
+            <p class="text-muted" *ngIf="offer.description.length===0"> Nu este descriere.</p>
+            <small>{{offer.created | date: "dd MMM yyyy"}}</small>
+          </div>
+          <div class="col-2 text-center align-self-center">
+            <button class="btn btn-outline-primary btn-lg rounded-0">Vezi</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </mat-tab>
+
+</mat-tab-group>

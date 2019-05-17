@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+@import url('./css/bootstrap.epic.css');
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+body {
+  background: #ECEFF3;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.book-cover {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+
+  border-radius: 15px;
+  box-shadow: 0px 14px 30px -16px black;
+
+  &:after {
+    content: '';
+    display: block;
+    padding-top: 140%;
+  }
+}
+
+.section {
+  background: #F6F7F9;
+  text-align: justify;
+  padding: 16px;
+  margin-bottom: 32px;
+}
+
+textarea {
+  width: 100%;
+  background: #f8f9fa;
+  border: 0;
+  padding: 1rem;
+}
+
+.vertical-list {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-y: hidden;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+app-book.selected {
+    background: #03a9f4;
+    border-radius: 15px;
+  }

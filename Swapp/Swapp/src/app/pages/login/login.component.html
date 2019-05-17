@@ -1,0 +1,27 @@
+<h1 class="text-center my-5">Intra in cont</h1>
+<div class="offset-md-3 col-md-6">
+
+  <div class="alert alert-secondary" [class.alert-danger]="loginModel.isLoading===false"
+    *ngIf="loginModel.isGood()===false && this.loginModel.status!=='ready'">
+    {{loginModel.message}}
+  </div>
+
+  <form [formGroup]="user" (ngSubmit)="Login()">
+    <mat-card class="bg-white p-4 my-4">
+
+      <mat-form-field class="w-100">
+        <input matInput placeholder="Introduce numele de utilizator" formControlName="username">
+      </mat-form-field>
+      <mat-form-field class="w-100">
+        <input type="password" matInput autocomplete="new-password" placeholder="Introduce parola"
+          formControlName="password">
+      </mat-form-field>
+      <div class="text-right">
+        <button type="submit" mat-flat-button color="primary"
+          [disabled]="user.valid===false || loginModel.isLoading">Logare</button>
+      </div>
+    </mat-card>
+  </form>
+
+  <p>Nu ai cont? <a class="text-primary pointer" routerLink="/signup">Creaza acum gratuit!</a> </p>
+</div>
